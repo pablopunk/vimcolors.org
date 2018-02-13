@@ -1,0 +1,29 @@
+{
+  "name": "vimcolors.org",
+  "version": "1.0.0",
+  "description": "Create your vim colorscheme, made easy",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [
+    "vim",
+    "colors",
+    "scheme",
+    "website",
+    "nextjs",
+    "javascript"
+  ],
+  "author": "Pablo Varela",
+  "license": "MIT",
+  "dependencies": {
+    "auto-bind": "^1.2.0",
+    "next": "^5.0.0",
+    "react": "^16.2.0",
+    "react-color": "^2.13.8",
+    "react-dom": "^16.2.0",
+    "vim-colors": "^1.0.0"
+  }
+}
