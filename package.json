@@ -2,7 +2,9 @@
   "name": "vimcolors.org",
   "version": "1.0.0",
   "description": "Create your vim colorscheme, made easy",
-  "main": "index.js",
+  "now": {
+    "alias": "vimcolors.org"
+  },
   "scripts": {
     "dev": "next",
     "build": "next build",
