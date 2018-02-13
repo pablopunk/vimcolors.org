@@ -39,6 +39,9 @@ const removeHash = colors => {
 const generateFile = (name, colors) => {
   const newColors = removeHash(colors)
   name = normalize(name)
+  if (!name) {
+    name = 'my-scheme'
+  }
 
   const vimScript = vim(name, {
     fg: newColors.fg,
