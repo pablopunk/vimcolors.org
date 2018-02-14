@@ -1,6 +1,6 @@
 /* global URL, Blob */
 import React from 'react'
-import {TwitterPicker as Picker} from 'react-color'
+import {SketchPicker as Picker} from 'react-color'
 import vim from 'vim-colors'
 
 const normalize = str => {
@@ -77,6 +77,24 @@ export default class extends React.Component {
     }
   }
 
+  componentDidMount () {
+    document.addEventListener('mousedown', ev => this.handleClickOutside(ev))
+  }
+
+  componentWillUnmount () {
+    document.removeEventListener('mousedown', ev => this.handleClickOutside(ev))
+  }
+
+  setWrapperRef (node) {
+    this.wrapperRef = node
+  }
+
+  handleClickOutside (ev) {
+    if (this.wrapperRef && !this.wrapperRef.contains(ev.target)) {
+      this.closePickers()
+    }
+  }
+
   pickerClicked (which) {
     if (this.state.pickers.hasOwnProperty(which)) {
       const pickers = { ...this.state.pickers }
@@ -93,7 +111,7 @@ export default class extends React.Component {
     }
   }
 
-  terminalClicked () {
+  closePickers () {
     this.setState({
       pickers: {
         bg: false,
@@ -125,69 +143,88 @@ export default class extends React.Component {
     const {colors, pickers} = this.state
 
     return <div>
-      <input onChange={ev => this.handleNameChange(ev)} type='text' placeholder='Choose a name' value={this.state.name} />
-      <section onClick={() => this.terminalClicked()}>
-        <div>
-          <article>
-            <label onClick={ev => {
-              this.pickerClicked('bg')
-              ev.stopPropagation()
-            }}>Background</label>
-            { pickers.bg &&
-            <Picker color={colors.bg} onChangeComplete={color => this.changeColor('bg', color.hex)} />
+      <div className='terminal-wrapper'>
+        <input onChange={ev => this.handleNameChange(ev)} type='text' placeholder='Choose a name' value={this.state.name} />
+        <section>
+          <div>
+            <article>
+              <label onClick={ev => {
+                this.pickerClicked('bg')
+                ev.stopPropagation()
+              }}>Background</label>
+              { pickers.bg &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
+                <Picker color={colors.bg} onChangeComplete={color => this.changeColor('bg', color.hex)} />
+              </div>
           }
-          </article>
-          <article>
-            <label onClick={ev => {
-              this.pickerClicked('fg')
-              ev.stopPropagation()
-            }}>Foreground</label>
-            { pickers.fg &&
-            <Picker color={colors.bg} onChangeComplete={color => this.changeColor('fg', color.hex)} />
+            </article>
+            <article>
+              <label onClick={ev => {
+                this.pickerClicked('fg')
+                ev.stopPropagation()
+              }}>Foreground</label>
+              { pickers.fg &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
+                <Picker color={colors.bg} onChangeComplete={color => this.changeColor('fg', color.hex)} />
+              </div>
         }
-          </article>
-        </div>
-        <div>
-          <article>
-            <label onClick={ev => {
-              this.pickerClicked('color1')
-              ev.stopPropagation()
-            }} style={{ color: colors.color1 }}>Color 1</label>
-            { pickers.color1 &&
-            <Picker color={colors.color1} onChangeComplete={color => this.changeColor('color1', color.hex)} />
+            </article>
+          </div>
+          <div>
+            <article>
+              <label onClick={ev => {
+                this.pickerClicked('color1')
+                ev.stopPropagation()
+              }} style={{ color: colors.color1 }}>Color 1</label>
+              { pickers.color1 &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
+                <Picker color={colors.color1} onChangeComplete={color => this.changeColor('color1', color.hex)} />
+              </div>
       }
-          </article>
-          <article>
-            <label onClick={ev => {
-              this.pickerClicked('color2')
-              ev.stopPropagation()
-            }} style={{ color: colors.color2 }}>Color 2</label>
-            { pickers.color2 &&
-            <Picker color={colors.color2} onChangeComplete={color => this.changeColor('color2', color.hex)} />
+            </article>
+            <article>
+              <label onClick={ev => {
+                this.pickerClicked('color2')
+                ev.stopPropagation()
+              }} style={{ color: colors.color2 }}>Color 2</label>
+              { pickers.color2 &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
+                <Picker color={colors.color2} onChangeComplete={color => this.changeColor('color2', color.hex)} />
+              </div>
     }
-          </article>
-          <article>
-            <label onClick={ev => {
-              this.pickerClicked('color3')
-              ev.stopPropagation()
-            }} style={{ color: colors.color3 }}>Color 3</label>
-            { pickers.color3 &&
-            <Picker color={colors.color3} onChangeComplete={color => this.changeColor('color3', color.hex)} />
+            </article>
+            <article>
+              <label onClick={ev => {
+                this.pickerClicked('color3')
+                ev.stopPropagation()
+              }} style={{ color: colors.color3 }}>Color 3</label>
+              { pickers.color3 &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
+                <Picker color={colors.color3} onChangeComplete={color => this.changeColor('color3', color.hex)} />
+              </div>
   }
-          </article>
-          <article>
-            <label onClick={ev => {
-              this.pickerClicked('color4')
-              ev.stopPropagation()
-            }} style={{ color: colors.color4 }}>Color 4</label>
-            { pickers.color4 &&
-            <Picker color={colors.color4} onChangeComplete={color => this.changeColor('color4', color.hex)} />
+            </article>
+            <article>
+              <label onClick={ev => {
+                this.pickerClicked('color4')
+                ev.stopPropagation()
+              }} style={{ color: colors.color4 }}>Color 4</label>
+              { pickers.color4 &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
+                <Picker color={colors.color4} onChangeComplete={color => this.changeColor('color4', color.hex)} />
+              </div>
 }
-          </article>
-        </div>
-      </section>
-      <button onClick={() => this.downloadClicked()}>Download</button>
+            </article>
+          </div>
+        </section>
+        <button onClick={() => this.downloadClicked()}>Download</button>
+      </div>
       <style jsx>{`
+        .terminal-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
         input {
           font-size: 1.3em;
           margin-bottom: 1em;
@@ -211,6 +248,7 @@ export default class extends React.Component {
           border: 1px solid black;
           border-radius: 5px;
           display: flex;
+          justify-content: space-between;
         }
         .pull-right {
           float: right;
@@ -223,6 +261,9 @@ export default class extends React.Component {
           padding: .2em .5em;
           text-decoration: underline;
         }
+        .picker {
+          position: absolute;
+        }
         button {
           margin-top: 1em;
           font-size: 1.2em;
@@ -231,6 +272,7 @@ export default class extends React.Component {
           color: white;
           padding: .5em 2em;
           border: none;
+          border-radius: 3px;
         }
         button:hover {
           background-color: white;
