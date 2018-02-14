@@ -18,12 +18,10 @@ const normalize = str => {
 const defaults = {
   bg: '#252a38',
   fg: '#ffffff',
-  color1: '#E57263',
-  color2: '#42BDBD',
-  color3: '#D66D93',
-  color4: '#7D4B82',
-  color5: '#EACB5F',
-  color6: '#00A06E'
+  color1: '#eb597b',
+  color2: '#fcb900',
+  color3: '#12cbc5',
+  color4: '#9980fa'
 }
 
 const removeHash = colors => {
@@ -50,9 +48,7 @@ const generateFile = (name, colors) => {
       newColors.color1,
       newColors.color2,
       newColors.color3,
-      newColors.color4,
-      newColors.color5,
-      newColors.color6
+      newColors.color4
     ]
   })
 
@@ -76,9 +72,7 @@ export default class extends React.Component {
         color1: false,
         color2: false,
         color3: false,
-        color4: false,
-        color5: false,
-        color6: false
+        color4: false
       }
     }
   }
@@ -107,9 +101,7 @@ export default class extends React.Component {
         color1: false,
         color2: false,
         color3: false,
-        color4: false,
-        color5: false,
-        color6: false
+        color4: false
       }
     })
   }
@@ -191,24 +183,6 @@ export default class extends React.Component {
             { pickers.color4 &&
             <Picker color={colors.color4} onChangeComplete={color => this.changeColor('color4', color.hex)} />
 }
-          </article>
-          <article>
-            <label onClick={ev => {
-              this.pickerClicked('color5')
-              ev.stopPropagation()
-            }} style={{ color: colors.color5 }}>Color 5</label>
-            { pickers.color5 &&
-            <Picker color={colors.color5} onChangeComplete={color => this.changeColor('color5', color.hex)} />
-        }
-          </article>
-          <article>
-            <label onClick={ev => {
-              this.pickerClicked('color6')
-              ev.stopPropagation()
-            }} style={{ color: colors.color6 }}>Color 6</label>
-            { pickers.color6 &&
-            <Picker color={colors.color6} onChangeComplete={color => this.changeColor('color6', color.hex)} />
-      }
           </article>
         </div>
       </section>
