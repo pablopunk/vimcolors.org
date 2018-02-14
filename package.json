@@ -1,6 +1,6 @@
 {
   "name": "vimcolors.org",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create your vim colorscheme, made easy",
   "now": {
     "alias": "vimcolors.org"
