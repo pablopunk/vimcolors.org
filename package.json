@@ -31,6 +31,6 @@
     "react-color": "^2.13.8",
     "react-dom": "^16.2.0",
     "react-ga": "^2.4.1",
-    "vim-colors": "^2.0.0"
+    "vim-colors": "^2.1.0"
   }
 }
