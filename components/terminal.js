@@ -1,19 +1,6 @@
-/* global URL, Blob */
 import React from 'react'
 import {SketchPicker as Picker} from 'react-color'
-import vim from 'vim-colors'
-
-const normalize = str => {
-  let normalized = `${str}`
-
-  normalized = normalized.replace(/[^a-zA-Z0-9_]/g, '-').replace(/-{2,}/g, '-').replace(/^-/, '').replace(/-$/, '')
-
-  if (/^\d/.test(normalized)) {
-    normalized = `-${normalized}`
-  }
-
-  return normalized
-}
+import {generate} from '../lib/file'
 
 const defaults = {
   bg: '#252a38',
@@ -22,41 +9,6 @@ const defaults = {
   color2: '#fcb900',
   color3: '#12cbc5',
   color4: '#9980fa'
-}
-
-const removeHash = colors => {
-  const newColors = {}
-
-  for (const c in colors) {
-    newColors[c] = colors[c].split('#').pop()
-  }
-
-  return newColors
-}
-
-const generateFile = (name, colors) => {
-  const newColors = removeHash(colors)
-  name = normalize(name)
-  if (!name) {
-    name = 'my-scheme'
-  }
-
-  const vimScript = vim(name, {
-    fg: newColors.fg,
-    bg: newColors.bg,
-    scheme: [
-      newColors.color1,
-      newColors.color2,
-      newColors.color3,
-      newColors.color4
-    ]
-  })
-
-  const el = document.createElement('a')
-  const file = new Blob([vimScript], {type: 'text/plain'})
-  el.href = URL.createObjectURL(file)
-  el.download = `${name}.vim`
-  el.click()
 }
 
 export default class extends React.Component {
@@ -132,7 +84,7 @@ export default class extends React.Component {
   }
 
   downloadClicked () {
-    generateFile(this.state.name, this.state.colors)
+    generate(this.state.name, this.state.colors)
   }
 
   handleNameChange (ev) {
