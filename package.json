@@ -7,9 +7,8 @@
   },
   "scripts": {
     "dev": "next",
-    "build": "next build",
-    "start": "next start",
-    "dist": "npm run build && next export -o dist"
+    "build": "next build && next export -o dist",
+    "start": "next start"
   },
   "keywords": [
     "vim",
@@ -27,12 +26,12 @@
   },
   "dependencies": {
     "auto-bind": "^1.2.0",
-    "next": "latest",
+    "next": "^6.0.3",
     "react": "^16.2.0",
     "react-color": "^2.13.8",
     "react-dom": "^16.2.0",
     "react-ga": "^2.4.1",
     "save-file": "^1.2.0",
-    "vim-colors": "^2.1.3"
+    "vim-colors": "^2.3.0"
   }
 }
