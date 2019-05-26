@@ -10,13 +10,6 @@ export default class extends React.Component {
 
   render () {
     return <div>
-      <Head>
-        <title>Vim Colors</title>
-        <meta
-          name='viewport'
-          content='width=device-width, user-scalable=no'
-        />
-      </Head>
       <main>{ this.props.children }</main>
       <style jsx>{`
         main {
