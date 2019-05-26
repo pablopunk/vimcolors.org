@@ -9,7 +9,7 @@ const defaults = {
   color2: '#2CF6B3',
   color3: '#FFE66D',
   color4: '#809BCE',
-  color5: '#CE92CB',
+  color5: '#FF6699',
   color6: '#4ECDC4'
 }
 
