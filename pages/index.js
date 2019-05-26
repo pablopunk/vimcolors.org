@@ -5,11 +5,18 @@ export default () =>
   <Layout>
     <div className='container'>
       <h1>Vim Colors</h1>
+      <small>`Generate your own vim colorschemes`</small>
       <p>
+        <h2>1. </h2>
         Choose below your favorite colors and they
         will become a vim colorscheme!
       </p>
       <Terminal />
+      <p>
+        <h2>2. </h2>
+        Now you can <pre>:source "path/to/your/file.vim"</pre> inside vim or neovim.
+      </p>
+      <p>Alternatively, you can publish it via github and use it as any other plugin. Check out <a href="https://github.com/pablopunk/sick.vim">this one</a> as a simple example.</p>
     </div>
     <style jsx>{`
       .container {
@@ -18,6 +25,24 @@ export default () =>
         align-items: center;
       }
       h1 {
+        color: tomato;
+        margin-bottom: 5px;
+      }
+      h2 {
+        color: royalblue;
+        display: inline;
+      }
+      small {
+        background-color: aquamarine;
+        color: #333;
+        padding: 2px;
+      }
+      pre {
+        display: inline;
+        font-size: 1.4em;
+        color: royalblue;
+      }
+      a {
         color: tomato;
       }
     `}</style>

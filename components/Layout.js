@@ -13,7 +13,7 @@ export default class extends React.Component {
       <main>{ this.props.children }</main>
       <style jsx>{`
         main {
-          max-width: 1000px;
+          max-width: 500px;
           margin: 0 auto;
           padding: 1em;
           font-family: 'SF Mono', Menlo, monospace;
