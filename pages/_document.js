@@ -14,6 +14,7 @@ export default class MyDocument extends Document {
           <title>Vim colors | Generate your custom colorscheme</title>
           <meta name='viewport' content='width=device-width, initial-scale=1' />
           <meta name='description' content='Generate your custom colorscheme for vim and export it to a vim-compatible file' />
+          <meta name='keywords' content='vim,colors,scheme,colorscheme,generator,generate,website,modern,minimalistic,tool,palette,background,foreground,file'/>
           <link rel='canonical' href='https://vimcolors.org' />
         </Head>
         <body>
