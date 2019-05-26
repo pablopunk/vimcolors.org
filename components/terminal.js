@@ -129,72 +129,21 @@ export default class extends React.Component {
             </article>
           </div>
           <div>
-            <article>
-              <label onClick={ev => {
-                this.pickerClicked('color1')
-                ev.stopPropagation()
-              }} style={{ color: colors.color1 }}>Color 1</label>
-              { pickers.color1 &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.color1} onChangeComplete={color => this.changeColor('color1', color.hex)} />
-              </div>
+            {
+            [1,2,3,4,5,6].map((colorN) => (
+              <article>
+                <label onClick={ev => {
+                  this.pickerClicked('color'+colorN)
+                  ev.stopPropagation()
+                }} style={{ color: colors['color'+colorN] }}>Color {colorN}</label>
+                { pickers['color'+colorN] &&
+                <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
+                  <Picker color={colors['color'+colorN]} onChangeComplete={color => this.changeColor('color'+colorN, color.hex)} />
+                </div>
       }
-            </article>
-            <article>
-              <label onClick={ev => {
-                this.pickerClicked('color2')
-                ev.stopPropagation()
-              }} style={{ color: colors.color2 }}>Color 2</label>
-              { pickers.color2 &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.color2} onChangeComplete={color => this.changeColor('color2', color.hex)} />
-              </div>
-    }
-            </article>
-            <article>
-              <label onClick={ev => {
-                this.pickerClicked('color3')
-                ev.stopPropagation()
-              }} style={{ color: colors.color3 }}>Color 3</label>
-              { pickers.color3 &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.color3} onChangeComplete={color => this.changeColor('color3', color.hex)} />
-              </div>
-  }
-            </article>
-            <article>
-              <label onClick={ev => {
-                this.pickerClicked('color4')
-                ev.stopPropagation()
-              }} style={{ color: colors.color4 }}>Color 4</label>
-              { pickers.color4 &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.color4} onChangeComplete={color => this.changeColor('color4', color.hex)} />
-              </div>
-}
-            </article>
-            <article>
-              <label onClick={ev => {
-                this.pickerClicked('color4')
-                ev.stopPropagation()
-              }} style={{ color: colors.color5 }}>Color 5</label>
-              { pickers.color5 &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.color4} onChangeComplete={color => this.changeColor('color5', color.hex)} />
-              </div>
-}
-            </article>
-            <article>
-              <label onClick={ev => {
-                this.pickerClicked('color5')
-                ev.stopPropagation()
-              }} style={{ color: colors.color6 }}>Color 6</label>
-              { pickers.color6 &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.color5} onChangeComplete={color => this.changeColor('color6', color.hex)} />
-              </div>
-}
-            </article>
+              </article>
+            ))
+            }
           </div>
         </section>
         <button onClick={() => this.downloadClicked()}>Download</button>
