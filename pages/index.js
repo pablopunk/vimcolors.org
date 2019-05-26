@@ -13,7 +13,9 @@ export default () =>
         >
         Source on GitHub
       </ForkMe>
-      <h1>Vim Colors</h1>
+      <a href="/">
+        <h1>Vim Colors</h1>
+      </a>
       <small>`Generate your own vim colorschemes`</small>
       <p>
         <h2>1. </h2>
@@ -53,6 +55,7 @@ export default () =>
       }
       a {
         color: tomato;
+        text-decoration: none;
       }
     `}</style>
   </Layout>
