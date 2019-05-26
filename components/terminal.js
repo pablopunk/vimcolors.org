@@ -3,12 +3,14 @@ import {SketchPicker as Picker} from 'react-color'
 import {generate} from '../lib/file'
 
 const defaults = {
-  bg: '#252a38',
-  fg: '#ffffff',
-  color1: '#eb597b',
-  color2: '#fcb900',
-  color3: '#12cbc5',
-  color4: '#9980fa'
+  bg: '#1E1F28',
+  fg: '#F7FFF7',
+  color1: '#FF6B6B',
+  color2: '#2CF6B3',
+  color3: '#FFE66D',
+  color4: '#809BCE',
+  color5: '#CE92CB',
+  color6: '#4ECDC4'
 }
 
 export default class extends React.Component {
@@ -24,7 +26,9 @@ export default class extends React.Component {
         color1: false,
         color2: false,
         color3: false,
-        color4: false
+        color4: false,
+        color5: false,
+        color6: false
       }
     }
   }
@@ -71,7 +75,9 @@ export default class extends React.Component {
         color1: false,
         color2: false,
         color3: false,
-        color4: false
+        color4: false,
+        color5: false,
+        color6: false
       }
     })
   }
@@ -164,6 +170,28 @@ export default class extends React.Component {
               { pickers.color4 &&
               <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
                 <Picker color={colors.color4} onChangeComplete={color => this.changeColor('color4', color.hex)} />
+              </div>
+}
+            </article>
+            <article>
+              <label onClick={ev => {
+                this.pickerClicked('color4')
+                ev.stopPropagation()
+              }} style={{ color: colors.color5 }}>Color 5</label>
+              { pickers.color5 &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
+                <Picker color={colors.color4} onChangeComplete={color => this.changeColor('color5', color.hex)} />
+              </div>
+}
+            </article>
+            <article>
+              <label onClick={ev => {
+                this.pickerClicked('color5')
+                ev.stopPropagation()
+              }} style={{ color: colors.color6 }}>Color 6</label>
+              { pickers.color6 &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
+                <Picker color={colors.color5} onChangeComplete={color => this.changeColor('color6', color.hex)} />
               </div>
 }
             </article>
