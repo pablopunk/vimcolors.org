@@ -27,7 +27,7 @@ export default () =>
         <h2>2. </h2>
         Now you can <pre>:source "path/to/your/file.vim"</pre> inside vim or neovim.
       </p>
-      <p>Alternatively, you can publish it via github and use it as any other plugin. Check out <a href="https://github.com/pablopunk/sick.vim">this one</a> as a simple example.</p>
+      <p>Alternatively, you can publish it via github and use it as any other plugin. Check out <a href="//github.com/pablopunk/sick.vim">this one</a> as a simple example.</p>
     </div>
     <style jsx>{`
       .container {
