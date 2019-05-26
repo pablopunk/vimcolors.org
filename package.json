@@ -30,6 +30,6 @@
     "react-ga": "^2.4.1",
     "react-github-fork-ribbon": "^0.6.0",
     "save-file": "^1.2.0",
-    "vim-colors": "^3.0.0"
+    "vim-colors": "^3.0.1"
   }
 }
