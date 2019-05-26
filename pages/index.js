@@ -1,9 +1,18 @@
 import Layout from '../components/Layout'
 import Terminal from '../components/terminal'
+import ForkMe from 'react-github-fork-ribbon'
 
 export default () =>
   <Layout>
     <div className='container'>
+      <ForkMe
+        position='right'
+        color='black'
+        href='//github.com/pablopunk/vimcolors.org'
+        target='_blank'
+        >
+        Source on GitHub
+      </ForkMe>
       <h1>Vim Colors</h1>
       <small>`Generate your own vim colorschemes`</small>
       <p>
