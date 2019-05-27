@@ -1,6 +1,7 @@
 import App, {Container} from 'next/app'
 import Head from 'next/head'
 import React from 'react'
+import Layout from '../components/Layout'
 
 export default class MyApp extends App {
   static async getInitialProps ({ Component, ctx }) {
@@ -21,7 +22,9 @@ export default class MyApp extends App {
         <Head>
           <title>Vim colors | Generate your custom colorscheme</title>
         </Head>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Container>
     )
   }
