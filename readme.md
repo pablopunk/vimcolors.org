@@ -4,4 +4,4 @@
 
 ### See also
 
-- [vim-colors](https://github.com/pablopunk/vim-colors): The npm module that uses this website
+- [vim-colors](https://github.com/pablopunk/vim-colors): The npm module that this website uses
