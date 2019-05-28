@@ -5,6 +5,8 @@ import {generate} from '../lib/file'
 const defaults = {
   bg: '#1E1F28',
   fg: '#F7FFF7',
+  comments: '#cccccc',
+  altBg: '#001133',
   color1: '#FF6B6B',
   color2: '#2CF6B3',
   color3: '#FFE66D',
@@ -23,6 +25,8 @@ export default class extends React.Component {
       pickers: {
         bg: false,
         fg: false,
+        comments: false,
+        altBg: false,
         color1: false,
         color2: false,
         color3: false,
@@ -72,6 +76,8 @@ export default class extends React.Component {
       pickers: {
         bg: false,
         fg: false,
+        altBg: false,
+        comments: false,
         color1: false,
         color2: false,
         color3: false,
@@ -124,6 +130,32 @@ export default class extends React.Component {
               { pickers.fg &&
               <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
                 <Picker color={colors.bg} onChangeComplete={color => this.changeColor('fg', color.hex)} />
+              </div>
+        }
+            </article>
+            <article>
+              <label onClick={ev => {
+                this.pickerClicked('altBg')
+                ev.stopPropagation()
+              }} style={{
+                backgroundColor: colors.altBg
+              }}>Hover</label>
+              { pickers.altBg &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
+                <Picker color={colors.bg} onChangeComplete={color => this.changeColor('altBg', color.hex)} />
+              </div>
+        }
+            </article>
+            <article>
+              <label onClick={ev => {
+                this.pickerClicked('comments')
+                ev.stopPropagation()
+              }} style={{
+                color: colors.comments
+              }}>// Comments</label>
+              { pickers.comments &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
+                <Picker color={colors.bg} onChangeComplete={color => this.changeColor('comments', color.hex)} />
               </div>
         }
             </article>
