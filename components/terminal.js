@@ -129,7 +129,7 @@ export default class extends React.Component {
               }}>Foreground</label>
               { pickers.fg &&
               <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.bg} onChangeComplete={color => this.changeColor('fg', color.hex)} />
+                <Picker color={colors.fg} onChangeComplete={color => this.changeColor('fg', color.hex)} />
               </div>
         }
             </article>
@@ -142,7 +142,7 @@ export default class extends React.Component {
               }}>Hover</label>
               { pickers.altBg &&
               <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.bg} onChangeComplete={color => this.changeColor('altBg', color.hex)} />
+                <Picker color={colors.altBg} onChangeComplete={color => this.changeColor('altBg', color.hex)} />
               </div>
         }
             </article>
@@ -155,7 +155,7 @@ export default class extends React.Component {
               }}>// Comments</label>
               { pickers.comments &&
               <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.bg} onChangeComplete={color => this.changeColor('comments', color.hex)} />
+                <Picker color={colors.comments} onChangeComplete={color => this.changeColor('comments', color.hex)} />
               </div>
         }
             </article>
