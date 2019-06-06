@@ -5,14 +5,14 @@ import {generate} from '../lib/file'
 const defaults = {
   bg: '#1E1F28',
   fg: '#F7FFF7',
-  comments: '#cccccc',
+  comments: '#454545',
   altBg: '#001133',
-  color1: '#FF6B6B',
-  color2: '#2CF6B3',
-  color3: '#FFE66D',
-  color4: '#809BCE',
-  color5: '#FF6699',
-  color6: '#4ECDC4'
+  color1: '#F66F6F',
+  color2: '#6FF6BE',
+  color3: '#F6D96F',
+  color4: '#6FB5F6',
+  color5: '#D36FF6',
+  color6: '#6FEEF6'
 }
 
 export default class extends React.Component {
