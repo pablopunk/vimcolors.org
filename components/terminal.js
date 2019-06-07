@@ -1,18 +1,19 @@
 import React from 'react'
 import {SketchPicker as Picker} from 'react-color'
+import sick from 'sick-colors'
 import {generate} from '../lib/file'
 
 const defaults = {
   bg: '#1E1F28',
   fg: '#F7FFF7',
-  comments: '#454545',
+  comments: sick.black,
   altBg: '#001133',
-  color1: '#F66F6F',
-  color2: '#6FF6BE',
-  color3: '#F6D96F',
-  color4: '#6FB5F6',
-  color5: '#D36FF6',
-  color6: '#6FEEF6'
+  color1: sick.red,
+  color2: sick.green,
+  color3: sick.yellow,
+  color4: sick.blue,
+  color5: sick.magenta,
+  color6: sick.cyan
 }
 
 export default class extends React.Component {
