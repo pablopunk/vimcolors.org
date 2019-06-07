@@ -4,10 +4,10 @@ import sick from 'sick-colors'
 import {generate} from '../lib/file'
 
 const defaults = {
-  bg: '#1E1F28',
-  fg: '#F7FFF7',
-  comments: sick.black,
-  menus: '#001133',
+  bg: sick.background,
+  fg: sick.foreground,
+  comments: sick.magenta,
+  menus: sick.black,
   color1: sick.red,
   color2: sick.green,
   color3: sick.yellow,
