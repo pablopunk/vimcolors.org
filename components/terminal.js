@@ -7,7 +7,7 @@ const defaults = {
   bg: '#1E1F28',
   fg: '#F7FFF7',
   comments: sick.black,
-  altBg: '#001133',
+  menus: '#001133',
   color1: sick.red,
   color2: sick.green,
   color3: sick.yellow,
@@ -27,7 +27,7 @@ export default class extends React.Component {
         bg: false,
         fg: false,
         comments: false,
-        altBg: false,
+        menus: false,
         color1: false,
         color2: false,
         color3: false,
@@ -77,7 +77,7 @@ export default class extends React.Component {
       pickers: {
         bg: false,
         fg: false,
-        altBg: false,
+        menus: false,
         comments: false,
         color1: false,
         color2: false,
@@ -136,14 +136,14 @@ export default class extends React.Component {
             </article>
             <article>
               <label onClick={ev => {
-                this.pickerClicked('altBg')
+                this.pickerClicked('menus')
                 ev.stopPropagation()
               }} style={{
-                backgroundColor: colors.altBg
-              }}>Hover</label>
-              { pickers.altBg &&
+                backgroundColor: colors.menus
+              }}>Menus</label>
+              { pickers.menus &&
               <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.altBg} onChangeComplete={color => this.changeColor('altBg', color.hex)} />
+                <Picker color={colors.menus} onChangeComplete={color => this.changeColor('menus', color.hex)} />
               </div>
         }
             </article>
