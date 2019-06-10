@@ -14,10 +14,6 @@ export default () => {
     }
   }
 
-  function downloadClicked () {
-    generate(this.state.name, this.state.colors)
-  }
-
   return <div>
     <div className='container'>
       <ForkMe
@@ -45,7 +41,6 @@ export default () => {
         </button>
       </article>
       <Terminal theme={theme}/>
-      <button className='download' onClick={() => downloadClicked()}>Download</button>
       <article>
         <h2>2. </h2>
         <p>
@@ -95,18 +90,6 @@ export default () => {
         button:hover {
           color: royalblue;
           cursor: pointer;
-        }
-        .download:hover {
-          background-color: white;
-          color: royalblue;
-          border: 1px solid royalblue;
-          text-decoration: underline;
-        }
-        .download {
-          color: white;
-          background-color: royalblue;
-          border: none;
-          font-size: 1.2em;
         }
       `}</style>
   </div>

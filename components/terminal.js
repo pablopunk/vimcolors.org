@@ -70,6 +70,10 @@ export default class extends React.Component {
     }
   }
 
+  downloadClicked () {
+    generate(this.state.name, this.state.colors[this.props.theme])
+  }
+
   pickerClicked (which) {
     if (this.state.pickers.hasOwnProperty(which)) {
       const pickers = { ...this.state.pickers }
@@ -108,10 +112,6 @@ export default class extends React.Component {
     colors[which] = color
 
     this.setState({ colors })
-  }
-
-  downloadClicked () {
-    generate(this.state.name, this.state.colors)
   }
 
   handleNameChange (ev) {
@@ -196,6 +196,7 @@ export default class extends React.Component {
             }
           </div>
         </section>
+        <button className='download' onClick={() => this.downloadClicked()}>Download</button>
       </div>
       <style jsx>{`
         .terminal-wrapper {
@@ -241,6 +242,23 @@ export default class extends React.Component {
         }
         .picker {
           position: absolute;
+        }
+                button {
+          margin-top: 1em;
+          font-size: 1.2em;
+          font-family: 'SF Mono', Menlo, monospace;
+          background-color: royalblue;
+          color: white;
+          padding: .5em 2em;
+          border: none;
+          border-radius: 3px;
+        }
+        button:hover {
+          background-color: white;
+          color: royalblue;
+          border: 1px solid royalblue;
+          cursor: pointer;
+          text-decoration: underline;
         }
       `}</style>
     </div>
