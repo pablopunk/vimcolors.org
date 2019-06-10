@@ -1,9 +1,24 @@
-import Layout from '../components/Layout'
-import Terminal from '../components/terminal'
+import React, { useState } from 'react'
 import ForkMe from 'react-github-fork-ribbon'
+import Terminal from '../components/terminal'
+import { generate } from '../lib/file'
 
-export default () =>
-  <div>
+export default () => {
+  const [theme, setTheme] = useState('dark')
+
+  function toggleTheme () {
+    if (theme === 'dark') {
+      setTheme('light')
+    } else {
+      setTheme('dark')
+    }
+  }
+
+  function downloadClicked () {
+    generate(this.state.name, this.state.colors)
+  }
+
+  return <div>
     <div className='container'>
       <ForkMe
         position='right'
@@ -11,7 +26,7 @@ export default () =>
         href='//github.com/pablopunk/vimcolors.org'
         target='_blank'
       >
-        Source on GitHub
+          Source on GitHub
       </ForkMe>
       <a href="/">
         <h1>Vim Colors</h1>
@@ -20,50 +35,79 @@ export default () =>
       <article>
         <h2>1. </h2>
         <p>
-          Choose below your favorite colors and they
-          will become a vim colorscheme!
+            Choose below your favorite colors and they
+            will become a vim colorscheme!
         </p>
       </article>
-      <Terminal />
+      <article>
+        <button className='toggleTheme' onClick={() => toggleTheme()}>
+          Toggle dark/light
+        </button>
+      </article>
+      <Terminal theme={theme}/>
+      <button className='download' onClick={() => downloadClicked()}>Download</button>
       <article>
         <h2>2. </h2>
         <p>
-          Now you can <code>:source "path/to/your/file.vim"</code> inside vim or neovim.
+            Now you can <code>:source "path/to/your/file.vim"</code> inside vim or neovim.
         </p>
       </article>
       <p>Alternatively, you can publish it via github and use it as any other plugin. Check out <a href="//github.com/pablopunk/sick.vim">this one</a> as a simple example.</p>
     </div>
     <style jsx>{`
-      .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      h1 {
-        color: tomato;
-        margin-bottom: 5px;
-      }
-      h2 {
-        color: royalblue;
-      }
-      h2, p {
-        display: inline;
-      }
-      article {
-        margin-top: 1em;
-      }
-      small {
-        background-color: aquamarine;
-        color: #333;
-        padding: 2px;
-      }
-      code {
-        font-size: 1.4em;
-        color: royalblue;
-      }
-      a {
-        color: tomato;
-        text-decoration: none;
-      }
-    `}</style>
-</div>
+        .container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        h1 {
+          color: tomato;
+          margin-bottom: 5px;
+        }
+        h2 {
+          color: royalblue;
+        }
+        h2, p {
+          display: inline;
+        }
+        article {
+          margin-top: 1em;
+        }
+        small {
+          background-color: aquamarine;
+          color: #333;
+          padding: 2px;
+        }
+        code {
+          font-size: 1.4em;
+          color: royalblue;
+        }
+        a {
+          color: tomato;
+          text-decoration: none;
+        }
+        button {
+          margin: 1em;
+          font-family: 'SF Mono', Menlo, monospace;
+          padding: .5em 2em;
+          border-radius: 3px;
+        }
+        button:hover {
+          color: royalblue;
+          cursor: pointer;
+        }
+        .download:hover {
+          background-color: white;
+          color: royalblue;
+          border: 1px solid royalblue;
+          text-decoration: underline;
+        }
+        .download {
+          color: white;
+          background-color: royalblue;
+          border: none;
+          font-size: 1.2em;
+        }
+      `}</style>
+  </div>
+}

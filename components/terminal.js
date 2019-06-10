@@ -1,19 +1,33 @@
 import React from 'react'
-import {SketchPicker as Picker} from 'react-color'
+import { SketchPicker as Picker } from 'react-color'
 import sick from 'sick-colors'
-import {generate} from '../lib/file'
+import { generate } from '../lib/file'
 
 const defaults = {
-  bg: sick.background,
-  fg: sick.foreground,
-  comments: sick.magenta,
-  menus: sick.black,
-  color1: sick.red,
-  color2: sick.green,
-  color3: sick.yellow,
-  color4: sick.blue,
-  color5: sick.magenta,
-  color6: sick.cyan
+  dark: {
+    bg: sick.background,
+    fg: sick.foreground,
+    comments: sick.magenta,
+    menus: sick.black,
+    color1: sick.red,
+    color2: sick.green,
+    color3: sick.yellow,
+    color4: sick.blue,
+    color5: sick.magenta,
+    color6: sick.cyan
+  },
+  light: {
+    bg: sick.light.background,
+    fg: sick.light.foreground,
+    comments: sick.light.magenta,
+    menus: sick.light.white,
+    color1: sick.light.red,
+    color2: sick.light.green,
+    color3: sick.light.yellow,
+    color4: sick.light.blue,
+    color5: sick.light.magenta,
+    color6: sick.light.cyan
+  }
 }
 
 export default class extends React.Component {
@@ -90,7 +104,7 @@ export default class extends React.Component {
   }
 
   changeColor (which, color) {
-    const {colors} = this.state
+    const { colors } = this.state
     colors[which] = color
 
     this.setState({ colors })
@@ -105,7 +119,10 @@ export default class extends React.Component {
   }
 
   render () {
-    const {colors, pickers} = this.state
+    const { theme } = this.props
+    let { colors, pickers } = this.state
+
+    colors = colors[theme]
 
     return <div>
       <div className='terminal-wrapper'>
@@ -121,7 +138,7 @@ export default class extends React.Component {
               <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
                 <Picker color={colors.bg} onChangeComplete={color => this.changeColor('bg', color.hex)} />
               </div>
-          }
+              }
             </article>
             <article>
               <label onClick={ev => {
@@ -132,7 +149,7 @@ export default class extends React.Component {
               <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
                 <Picker color={colors.fg} onChangeComplete={color => this.changeColor('fg', color.hex)} />
               </div>
-        }
+              }
             </article>
             <article>
               <label onClick={ev => {
@@ -145,7 +162,7 @@ export default class extends React.Component {
               <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
                 <Picker color={colors.menus} onChangeComplete={color => this.changeColor('menus', color.hex)} />
               </div>
-        }
+              }
             </article>
             <article>
               <label onClick={ev => {
@@ -158,28 +175,27 @@ export default class extends React.Component {
               <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
                 <Picker color={colors.comments} onChangeComplete={color => this.changeColor('comments', color.hex)} />
               </div>
-        }
+              }
             </article>
           </div>
           <div>
             {
-            [1,2,3,4,5,6].map((colorN) => (
-              <article key={'article'+colorN}>
-                <label onClick={ev => {
-                  this.pickerClicked('color'+colorN)
-                  ev.stopPropagation()
-                }} style={{ color: colors['color'+colorN] }}>Color {colorN}</label>
-                { pickers['color'+colorN] &&
+              [1, 2, 3, 4, 5, 6].map((colorN) => (
+                <article key={'article' + colorN}>
+                  <label onClick={ev => {
+                    this.pickerClicked('color' + colorN)
+                    ev.stopPropagation()
+                  }} style={{ color: colors['color' + colorN] }}>Color {colorN}</label>
+                  { pickers['color' + colorN] &&
                 <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                  <Picker color={colors['color'+colorN]} onChangeComplete={color => this.changeColor('color'+colorN, color.hex)} />
+                  <Picker color={colors['color' + colorN]} onChangeComplete={color => this.changeColor('color' + colorN, color.hex)} />
                 </div>
-      }
-              </article>
-            ))
+                  }
+                </article>
+              ))
             }
           </div>
         </section>
-        <button onClick={() => this.downloadClicked()}>Download</button>
       </div>
       <style jsx>{`
         .terminal-wrapper {
@@ -225,23 +241,6 @@ export default class extends React.Component {
         }
         .picker {
           position: absolute;
-        }
-        button {
-          margin-top: 1em;
-          font-size: 1.2em;
-          font-family: 'SF Mono', Menlo, monospace;
-          background-color: royalblue;
-          color: white;
-          padding: .5em 2em;
-          border: none;
-          border-radius: 3px;
-        }
-        button:hover {
-          background-color: white;
-          color: royalblue;
-          border: 1px solid royalblue;
-          cursor: pointer;
-          text-decoration: underline;
         }
       `}</style>
     </div>

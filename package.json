@@ -30,7 +30,7 @@
     "react-dom": "^16.8.6",
     "react-ga": "^2.5.7",
     "react-github-fork-ribbon": "^0.6.0",
-    "sick-colors": "^2.0.0",
-    "vim-colors": "^3.3.4"
+    "sick-colors": "^2.1.0",
+    "vim-colors": "^3.3.5"
   }
 }
