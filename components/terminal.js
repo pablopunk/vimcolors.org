@@ -196,7 +196,7 @@ export default class extends React.Component {
             }
           </div>
         </section>
-        <button className='download' onClick={() => this.downloadClicked()}>Download</button>
+        <button onClick={() => this.downloadClicked()}>Download</button>
       </div>
       <style jsx>{`
         .terminal-wrapper {

@@ -36,7 +36,7 @@ export default () => {
         </p>
       </article>
       <article>
-        <button className='toggleTheme' onClick={() => toggleTheme()}>
+        <button onClick={() => toggleTheme()}>
           Toggle dark/light
         </button>
       </article>
@@ -86,6 +86,8 @@ export default () => {
           font-family: 'SF Mono', Menlo, monospace;
           padding: .5em 2em;
           border-radius: 3px;
+          background-color: white;
+          border: 1px solid gray;
         }
         button:hover {
           color: royalblue;
