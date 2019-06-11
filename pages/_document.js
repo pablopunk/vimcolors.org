@@ -10,6 +10,13 @@ export default class MyDocument extends Document {
     return (
       <html lang='en'>
         <Head>
+					<!-- Google Tag Manager -->
+					<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+					new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+					j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+					'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+					})(window,document,'script','dataLayer','GTM-PDN43VC');</script>
+					<!-- End Google Tag Manager --><Paste>
           <meta name='viewport' content='width=device-width, initial-scale=1' />
           <meta name='description' content='Choose up to 6 colors of your choisec. Then, generate a custom colorscheme for vim based only on those colors and export it to a vim-compatible file' />
           <meta name='keywords' content='vim,colors,scheme,colorscheme,generator,generate,website,modern,minimalistic,tool,palette,background,foreground,file'/>
@@ -42,6 +49,10 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
+				<!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PDN43VC"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+				<!-- End Google Tag Manager (noscript) -->
       </html>
     )
   }
