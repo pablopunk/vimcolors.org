@@ -1,5 +1,4 @@
 import React from 'react'
-import Head from 'next/head'
 import ReactGA from 'react-ga'
 
 export default class extends React.Component {
