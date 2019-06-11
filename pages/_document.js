@@ -48,8 +48,12 @@ export default class MyDocument extends Document {
           <meta name='theme-color' content='#ffffff' />
         </Head>
         <body>
-          <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PDN43VC"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+          <noscript
+            dangerouslySetInnerHTML={{
+              __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PDN43VC"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>`
+            }}
+          />
           <Main />
           <NextScript />
         </body>
