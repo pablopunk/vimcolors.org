@@ -35,8 +35,9 @@ export default class extends React.Component {
     super(props)
 
     this.state = {
-      name: 'my-custom-scheme',
-      colors: { ...defaults },
+      name: '',
+      theme: props.theme,
+      colors: { ...defaults[props.theme] },
       pickers: {
         bg: false,
         fg: false,
@@ -60,6 +61,13 @@ export default class extends React.Component {
     document.removeEventListener('mousedown', ev => this.handleClickOutside(ev))
   }
 
+  static getDerivedStateFromProps (nextProps, prevState) {
+    if (nextProps.theme === prevState.theme) {
+      return null
+    }
+    return { colors: { ...defaults[nextProps.theme] }, theme: nextProps.theme }
+  }
+
   setWrapperRef (node) {
     this.wrapperRef = node
   }
@@ -71,7 +79,7 @@ export default class extends React.Component {
   }
 
   downloadClicked () {
-    generate(this.state.name, this.state.colors[this.props.theme])
+    generate(this.state.name, this.state.colors)
   }
 
   pickerClicked (which) {
@@ -119,10 +127,7 @@ export default class extends React.Component {
   }
 
   render () {
-    const { theme } = this.props
-    let { colors, pickers } = this.state
-
-    colors = colors[theme]
+    const { colors, pickers } = this.state
 
     return <div>
       <div className='terminal-wrapper'>
