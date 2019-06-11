@@ -248,20 +248,19 @@ export default class extends React.Component {
         .picker {
           position: absolute;
         }
-                button {
+        button {
           margin-top: 1em;
           font-size: 1.2em;
           font-family: 'SF Mono', Menlo, monospace;
           background-color: royalblue;
           color: white;
           padding: .5em 2em;
-          border: none;
+          border: 1px solid royalblue;
           border-radius: 3px;
         }
         button:hover {
           background-color: white;
           color: royalblue;
-          border: 1px solid royalblue;
           cursor: pointer;
           text-decoration: underline;
         }
