@@ -1,6 +1,12 @@
 
 {
   "version": 2,
-  "builds": [{ "src": "next.config.js", "use": "@now/next" }],
+  "builds": [
+    { "src": "next.config.js", "use": "@now/next" },
+    { "src": "pages/google-verification.html", "use": "@now/static" }
+  ],
+  "routes": [
+    { "src": "/googlea597039f99488b1a.html", "dest": "pages/google-verification.html" }
+  ],
   "alias": "vimcolors.org"
 }
