@@ -186,7 +186,7 @@ export default class extends React.Component {
           <div>
             {
               [1, 2, 3, 4, 5, 6].map((colorN) => (
-                <article key={'article' + colorN}>
+                <article key={'color' + colorN}>
                   <label onClick={ev => {
                     this.pickerClicked('color' + colorN)
                     ev.stopPropagation()
