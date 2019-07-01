@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { SketchPicker as Picker } from 'react-color'
 import sick from 'sick-colors'
 import { generate } from '../lib/file'
@@ -30,180 +30,159 @@ const defaults = {
   }
 }
 
-export default class extends React.Component {
-  constructor (props) {
-    super(props)
+export default (props) => {
+  const [ name, setName ] = useState('')
+  const [ colors, setColors ] = useState({ ...defaults[props.theme] })
+  const [ pickers, setPickers ] = useState({
+    bg: false,
+    fg: false,
+    comments: false,
+    menus: false,
+    color1: false,
+    color2: false,
+    color3: false,
+    color4: false,
+    color5: false,
+    color6: false
+  })
+  const [ wrapperRef, setWrapperRef ] = useState(null)
 
-    this.state = {
-      name: '',
-      theme: props.theme,
-      colors: { ...defaults[props.theme] },
-      pickers: {
-        bg: false,
-        fg: false,
-        comments: false,
-        menus: false,
-        color1: false,
-        color2: false,
-        color3: false,
-        color4: false,
-        color5: false,
-        color6: false
-      }
+  useEffect(() => {
+    setColors({ ...defaults[props.theme] })
+  }, [props.theme])
+
+  useEffect(() => {
+    document.addEventListener('mousedown', ev => handleClickOutside(ev))
+    return () => document.removeEventListener('mousedown', ev => handleClickOutside(ev))
+  })
+
+  function handleClickOutside (ev) {
+    if (wrapperRef && !wrapperRef.contains(ev.target)) {
+      closePickers()
     }
   }
 
-  componentDidMount () {
-    document.addEventListener('mousedown', ev => this.handleClickOutside(ev))
+  function downloadClicked () {
+    generate(name, colors)
   }
 
-  componentWillUnmount () {
-    document.removeEventListener('mousedown', ev => this.handleClickOutside(ev))
-  }
-
-  static getDerivedStateFromProps (nextProps, prevState) {
-    if (nextProps.theme === prevState.theme) {
-      return null
-    }
-    return { colors: { ...defaults[nextProps.theme] }, theme: nextProps.theme }
-  }
-
-  setWrapperRef (node) {
-    this.wrapperRef = node
-  }
-
-  handleClickOutside (ev) {
-    if (this.wrapperRef && !this.wrapperRef.contains(ev.target)) {
-      this.closePickers()
-    }
-  }
-
-  downloadClicked () {
-    generate(this.state.name, this.state.colors)
-  }
-
-  pickerClicked (which) {
-    if (this.state.pickers.hasOwnProperty(which)) {
-      const pickers = { ...this.state.pickers }
+  function pickerClicked (which) {
+    if (pickers.hasOwnProperty(which)) {
+      const newPickers = { ...pickers }
       const value = !pickers[which]
 
       // Close all
       for (const i in pickers) {
-        pickers[i] = false
+        newPickers[i] = false
       }
 
-      pickers[which] = value
+      newPickers[which] = value
 
-      this.setState({ pickers })
+      setPickers(newPickers)
     }
   }
 
-  closePickers () {
-    this.setState({
-      pickers: {
-        bg: false,
-        fg: false,
-        menus: false,
-        comments: false,
-        color1: false,
-        color2: false,
-        color3: false,
-        color4: false,
-        color5: false,
-        color6: false
-      }
+  function closePickers() {
+    setPickers({
+      bg: false,
+      fg: false,
+      menus: false,
+      comments: false,
+      color1: false,
+      color2: false,
+      color3: false,
+      color4: false,
+      color5: false,
+      color6: false
     })
   }
 
-  changeColor (which, color) {
-    const { colors } = this.state
-    colors[which] = color
-
-    this.setState({ colors })
+  function changeColor(which, color) {
+    setColors({
+      ...colors,
+      [which]: color
+    })
   }
 
-  handleNameChange (ev) {
-    this.setState({ name: ev.target.value })
+  function handleNameChange(ev) {
+    setName(ev.target.value)
   }
 
-  render () {
-    const { colors, pickers } = this.state
-
-    return <div>
-      <div className='terminal-wrapper'>
-        <input onChange={ev => this.handleNameChange(ev)} type='text' placeholder='Choose a name' value={this.state.name} />
-        <section>
-          <div>
-            <article>
-              <label onClick={ev => {
-                this.pickerClicked('bg')
-                ev.stopPropagation()
-              }}>Background</label>
-              { pickers.bg &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.bg} onChangeComplete={color => this.changeColor('bg', color.hex)} />
+  return <div>
+    <div className='terminal-wrapper'>
+      <input onChange={ev => handleNameChange(ev)} type='text' placeholder='Choose a name' value={name} />
+      <section>
+        <div>
+          <article>
+            <label onClick={ev => {
+              pickerClicked('bg')
+              ev.stopPropagation()
+            }}>Background</label>
+            { pickers.bg &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => setWrapperRef(node)}>
+                <Picker color={colors.bg} onChangeComplete={color => changeColor('bg', color.hex)} />
               </div>
-              }
-            </article>
-            <article>
-              <label onClick={ev => {
-                this.pickerClicked('fg')
-                ev.stopPropagation()
-              }}>Foreground</label>
-              { pickers.fg &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.fg} onChangeComplete={color => this.changeColor('fg', color.hex)} />
-              </div>
-              }
-            </article>
-            <article>
-              <label onClick={ev => {
-                this.pickerClicked('menus')
-                ev.stopPropagation()
-              }} style={{
-                backgroundColor: colors.menus
-              }}>Menus</label>
-              { pickers.menus &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.menus} onChangeComplete={color => this.changeColor('menus', color.hex)} />
-              </div>
-              }
-            </article>
-            <article>
-              <label onClick={ev => {
-                this.pickerClicked('comments')
-                ev.stopPropagation()
-              }} style={{
-                color: colors.comments
-              }}>// Comments</label>
-              { pickers.comments &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                <Picker color={colors.comments} onChangeComplete={color => this.changeColor('comments', color.hex)} />
-              </div>
-              }
-            </article>
-          </div>
-          <div>
-            {
-              [1, 2, 3, 4, 5, 6].map((colorN) => (
-                <article key={'color' + colorN}>
-                  <label onClick={ev => {
-                    this.pickerClicked('color' + colorN)
-                    ev.stopPropagation()
-                  }} style={{ color: colors['color' + colorN] }}>Color {colorN}</label>
-                  { pickers['color' + colorN] &&
-                <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => this.setWrapperRef(node)}>
-                  <Picker color={colors['color' + colorN]} onChangeComplete={color => this.changeColor('color' + colorN, color.hex)} />
-                </div>
-                  }
-                </article>
-              ))
             }
-          </div>
-        </section>
-        <button onClick={() => this.downloadClicked()}>Download</button>
-      </div>
-      <style jsx>{`
+          </article>
+          <article>
+            <label onClick={ev => {
+              pickerClicked('fg')
+              ev.stopPropagation()
+            }}>Foreground</label>
+            { pickers.fg &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => setWrapperRef(node)}>
+                <Picker color={colors.fg} onChangeComplete={color => changeColor('fg', color.hex)} />
+              </div>
+            }
+          </article>
+          <article>
+            <label onClick={ev => {
+              pickerClicked('menus')
+              ev.stopPropagation()
+            }} style={{
+              backgroundColor: colors.menus
+            }}>Menus</label>
+            { pickers.menus &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => setWrapperRef(node)}>
+                <Picker color={colors.menus} onChangeComplete={color => changeColor('menus', color.hex)} />
+              </div>
+            }
+          </article>
+          <article>
+            <label onClick={ev => {
+              pickerClicked('comments')
+              ev.stopPropagation()
+            }} style={{
+              color: colors.comments
+            }}>// Comments</label>
+            { pickers.comments &&
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => setWrapperRef(node)}>
+                <Picker color={colors.comments} onChangeComplete={color => changeColor('comments', color.hex)} />
+              </div>
+            }
+          </article>
+        </div>
+        <div>
+          {
+            [1, 2, 3, 4, 5, 6].map((colorN) => (
+              <article key={'color' + colorN}>
+                <label onClick={ev => {
+                  pickerClicked('color' + colorN)
+                  ev.stopPropagation()
+                }} style={{ color: colors['color' + colorN] }}>Color {colorN}</label>
+                { pickers['color' + colorN] &&
+                <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => setWrapperRef(node)}>
+                  <Picker color={colors['color' + colorN]} onChangeComplete={color => changeColor('color' + colorN, color.hex)} />
+                </div>
+                }
+              </article>
+            ))
+          }
+        </div>
+      </section>
+      <button onClick={() => downloadClicked()}>Download</button>
+    </div>
+    <style jsx>{`
         .terminal-wrapper {
           display: flex;
           flex-direction: column;
@@ -265,6 +244,5 @@ export default class extends React.Component {
           text-decoration: underline;
         }
       `}</style>
-    </div>
-  }
+  </div>
 }
