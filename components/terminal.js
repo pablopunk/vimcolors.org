@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import ReactDom from 'react-dom'
 import { SketchPicker as Picker } from 'react-color'
 import sick from 'sick-colors'
 import { generate } from '../lib/file'
@@ -45,7 +46,11 @@ export default (props) => {
     color5: false,
     color6: false
   })
-  const [ wrapperRef, setWrapperRef ] = useState(null)
+  const wrapperRefs = {}
+
+  for (let picker in pickers) {
+    wrapperRefs[picker] = React.createRef()
+  }
 
   useEffect(() => {
     setColors({ ...defaults[props.theme] })
@@ -57,8 +62,16 @@ export default (props) => {
   })
 
   function handleClickOutside (ev) {
-    if (wrapperRef && !wrapperRef.contains(ev.target)) {
-      closePickers()
+    const anyColorOpen = Object.entries(pickers)
+      .map(([color, isOpen]) => ({color, isOpen}))
+      .filter(({isOpen}) => isOpen)
+
+    if (anyColorOpen.length > 0) {
+      const ref = wrapperRefs[anyColorOpen[0].color]
+
+      if (ref && ref.current && !ref.current.contains(ev.target)) {
+        closePickers()
+      }
     }
   }
 
@@ -119,7 +132,7 @@ export default (props) => {
               ev.stopPropagation()
             }}>Background</label>
             { pickers.bg &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => setWrapperRef(node)}>
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={wrapperRefs.bg}>
                 <Picker color={colors.bg} onChangeComplete={color => changeColor('bg', color.hex)} />
               </div>
             }
@@ -130,7 +143,7 @@ export default (props) => {
               ev.stopPropagation()
             }}>Foreground</label>
             { pickers.fg &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => setWrapperRef(node)}>
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={wrapperRefs.fg}>
                 <Picker color={colors.fg} onChangeComplete={color => changeColor('fg', color.hex)} />
               </div>
             }
@@ -143,7 +156,7 @@ export default (props) => {
               backgroundColor: colors.menus
             }}>Menus</label>
             { pickers.menus &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => setWrapperRef(node)}>
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={wrapperRefs.menus}>
                 <Picker color={colors.menus} onChangeComplete={color => changeColor('menus', color.hex)} />
               </div>
             }
@@ -156,7 +169,7 @@ export default (props) => {
               color: colors.comments
             }}>// Comments</label>
             { pickers.comments &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => setWrapperRef(node)}>
+              <div className='picker' onClick={ev => ev.stopPropagation()} ref={wrapperRefs.comments}>
                 <Picker color={colors.comments} onChangeComplete={color => changeColor('comments', color.hex)} />
               </div>
             }
@@ -171,7 +184,7 @@ export default (props) => {
                   ev.stopPropagation()
                 }} style={{ color: colors['color' + colorN] }}>Color {colorN}</label>
                 { pickers['color' + colorN] &&
-                <div className='picker' onClick={ev => ev.stopPropagation()} ref={(node) => setWrapperRef(node)}>
+                <div className='picker' onClick={ev => ev.stopPropagation()} ref={wrapperRefs['color' + colorN]}>
                   <Picker color={colors['color' + colorN]} onChangeComplete={color => changeColor('color' + colorN, color.hex)} />
                 </div>
                 }
