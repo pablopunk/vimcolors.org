@@ -31,6 +31,6 @@
     "react-ga": "^2.5.7",
     "react-github-fork-ribbon": "^0.6.0",
     "sick-colors": "^3.0.3",
-    "vim-colors": "^4.0.4"
+    "vim-colors": "^5.0.0"
   }
 }
