@@ -1,4 +1,3 @@
-
 {
   "version": 2,
   "builds": [
@@ -6,7 +5,10 @@
     { "src": "pages/google-verification.html", "use": "@now/static" }
   ],
   "routes": [
-    { "src": "/googlea597039f99488b1a.html", "dest": "pages/google-verification.html" }
+    {
+      "src": "/googlea597039f99488b1a.html",
+      "dest": "pages/google-verification.html"
+    }
   ],
   "alias": "vimcolors.org"
 }
