@@ -15,7 +15,7 @@ const defaults = {
     color3: sick.yellow,
     color4: sick.blue,
     color5: sick.magenta,
-    color6: sick.cyan
+    color6: sick.cyan,
   },
   light: {
     bg: sick.light.background,
@@ -27,14 +27,14 @@ const defaults = {
     color3: sick.light.yellow,
     color4: sick.light.blue,
     color5: sick.light.magenta,
-    color6: sick.light.cyan
-  }
+    color6: sick.light.cyan,
+  },
 }
 
 export default (props) => {
-  const [ name, setName ] = useState('')
-  const [ colors, setColors ] = useState({ ...defaults[props.theme] })
-  const [ pickers, setPickers ] = useState({
+  const [name, setName] = useState('')
+  const [colors, setColors] = useState({ ...defaults[props.theme] })
+  const [pickers, setPickers] = useState({
     bg: false,
     fg: false,
     comments: false,
@@ -44,7 +44,7 @@ export default (props) => {
     color3: false,
     color4: false,
     color5: false,
-    color6: false
+    color6: false,
   })
   const wrapperRefs = {}
 
@@ -57,14 +57,15 @@ export default (props) => {
   }, [props.theme])
 
   useEffect(() => {
-    document.addEventListener('mousedown', ev => handleClickOutside(ev))
-    return () => document.removeEventListener('mousedown', ev => handleClickOutside(ev))
+    document.addEventListener('mousedown', (ev) => handleClickOutside(ev))
+    return () =>
+      document.removeEventListener('mousedown', (ev) => handleClickOutside(ev))
   })
 
-  function handleClickOutside (ev) {
+  function handleClickOutside(ev) {
     const anyColorOpen = Object.entries(pickers)
-      .map(([color, isOpen]) => ({color, isOpen}))
-      .filter(({isOpen}) => isOpen)
+      .map(([color, isOpen]) => ({ color, isOpen }))
+      .filter(({ isOpen }) => isOpen)
 
     if (anyColorOpen.length > 0) {
       const ref = wrapperRefs[anyColorOpen[0].color]
@@ -75,11 +76,11 @@ export default (props) => {
     }
   }
 
-  function downloadClicked () {
+  function downloadClicked() {
     generate(name, colors)
   }
 
-  function pickerClicked (which) {
+  function pickerClicked(which) {
     if (pickers.hasOwnProperty(which)) {
       const newPickers = { ...pickers }
       const value = !pickers[which]
@@ -106,14 +107,14 @@ export default (props) => {
       color3: false,
       color4: false,
       color5: false,
-      color6: false
+      color6: false,
     })
   }
 
   function changeColor(which, color) {
     setColors({
       ...colors,
-      [which]: color
+      [which]: color,
     })
   }
 
@@ -121,81 +122,153 @@ export default (props) => {
     setName(ev.target.value)
   }
 
-  return <div>
-    <div className='terminal-wrapper'>
-      <input onChange={ev => handleNameChange(ev)} type='text' placeholder='Choose a name' value={name} />
-      <section>
-        <div>
-          <article>
-            <label onClick={ev => {
-              pickerClicked('bg')
-              ev.stopPropagation()
-            }}>Background</label>
-            { pickers.bg &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={wrapperRefs.bg}>
-                <Picker color={colors.bg} onChangeComplete={color => changeColor('bg', color.hex)} />
-              </div>
-            }
-          </article>
-          <article>
-            <label onClick={ev => {
-              pickerClicked('fg')
-              ev.stopPropagation()
-            }}>Foreground</label>
-            { pickers.fg &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={wrapperRefs.fg}>
-                <Picker color={colors.fg} onChangeComplete={color => changeColor('fg', color.hex)} />
-              </div>
-            }
-          </article>
-          <article>
-            <label onClick={ev => {
+  return (
+    <div>
+      <div className="terminal-wrapper">
+        <input
+          onChange={(ev) => handleNameChange(ev)}
+          type="text"
+          placeholder="Choose a name"
+          value={name}
+        />
+        <section>
+          <div>
+            <article>
+              <label
+                onClick={(ev) => {
+                  pickerClicked('bg')
+                  ev.stopPropagation()
+                }}
+              >
+                Background
+              </label>
+              {pickers.bg && (
+                <div
+                  className="picker"
+                  onClick={(ev) => ev.stopPropagation()}
+                  ref={wrapperRefs.bg}
+                >
+                  <Picker
+                    color={colors.bg}
+                    onChangeComplete={(color) => changeColor('bg', color.hex)}
+                  />
+                </div>
+              )}
+            </article>
+            <article>
+              <label
+                onClick={(ev) => {
+                  pickerClicked('fg')
+                  ev.stopPropagation()
+                }}
+              >
+                Foreground
+              </label>
+              {pickers.fg && (
+                <div
+                  className="picker"
+                  onClick={(ev) => ev.stopPropagation()}
+                  ref={wrapperRefs.fg}
+                >
+                  <Picker
+                    color={colors.fg}
+                    onChangeComplete={(color) => changeColor('fg', color.hex)}
+                  />
+                </div>
+              )}
+            </article>
+            <article>
+              <label
+                onClick={(ev) => {
+                  pickerClicked('comments')
+                  ev.stopPropagation()
+                }}
+                style={{
+                  color: colors.comments,
+                }}
+              >
+                // Comments
+              </label>
+              {pickers.comments && (
+                <div
+                  className="picker"
+                  onClick={(ev) => ev.stopPropagation()}
+                  ref={wrapperRefs.comments}
+                >
+                  <Picker
+                    color={colors.comments}
+                    onChangeComplete={(color) =>
+                      changeColor('comments', color.hex)
+                    }
+                  />
+                </div>
+              )}
+            </article>
+          </div>
+          <div>
+            {[1, 2, 3, 4, 5, 6].map((colorN) => (
+              <article key={'color' + colorN}>
+                <label
+                  onClick={(ev) => {
+                    pickerClicked('color' + colorN)
+                    ev.stopPropagation()
+                  }}
+                  style={{ color: colors['color' + colorN] }}
+                >
+                  Color {colorN}
+                </label>
+                {pickers['color' + colorN] && (
+                  <div
+                    className="picker"
+                    onClick={(ev) => ev.stopPropagation()}
+                    ref={wrapperRefs['color' + colorN]}
+                  >
+                    <Picker
+                      color={colors['color' + colorN]}
+                      onChangeComplete={(color) =>
+                        changeColor('color' + colorN, color.hex)
+                      }
+                    />
+                  </div>
+                )}
+              </article>
+            ))}
+          </div>
+          <div
+            className="statusline"
+            onClick={(ev) => {
               pickerClicked('menus')
               ev.stopPropagation()
-            }} style={{
-              backgroundColor: colors.menus
-            }}>Menus</label>
-            { pickers.menus &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={wrapperRefs.menus}>
-                <Picker color={colors.menus} onChangeComplete={color => changeColor('menus', color.hex)} />
+            }}
+            style={{
+              backgroundColor: colors.menus,
+            }}
+          >
+            <span>/accent-color</span>
+            {pickers.menus && (
+              <div
+                className="picker"
+                onClick={(ev) => ev.stopPropagation()}
+                ref={wrapperRefs.menus}
+              >
+                <Picker
+                  color={colors.menus}
+                  onChangeComplete={(color) => {
+                    changeColor('menus', color.hex)
+                  }}
+                />
               </div>
-            }
-          </article>
-          <article>
-            <label onClick={ev => {
-              pickerClicked('comments')
-              ev.stopPropagation()
-            }} style={{
-              color: colors.comments
-            }}>// Comments</label>
-            { pickers.comments &&
-              <div className='picker' onClick={ev => ev.stopPropagation()} ref={wrapperRefs.comments}>
-                <Picker color={colors.comments} onChangeComplete={color => changeColor('comments', color.hex)} />
-              </div>
-            }
-          </article>
-        </div>
-        <div>
-          {
-            [1, 2, 3, 4, 5, 6].map((colorN) => (
-              <article key={'color' + colorN}>
-                <label onClick={ev => {
-                  pickerClicked('color' + colorN)
-                  ev.stopPropagation()
-                }} style={{ color: colors['color' + colorN] }}>Color {colorN}</label>
-                { pickers['color' + colorN] &&
-                <div className='picker' onClick={ev => ev.stopPropagation()} ref={wrapperRefs['color' + colorN]}>
-                  <Picker color={colors['color' + colorN]} onChangeComplete={color => changeColor('color' + colorN, color.hex)} />
-                </div>
-                }
-              </article>
-            ))
-          }
-        </div>
-      </section>
-      <button onClick={() => downloadClicked()}>Download</button>
-    </div>
-    <style jsx>{`
+            )}
+          </div>
+        </section>
+        <button onClick={() => downloadClicked()}>Download</button>
+      </div>
+      <style jsx>{`
+        .statusline {
+          position: absolute;
+          bottom: 10px;
+          width: calc(100% - 20px);
+        }
         .terminal-wrapper {
           display: flex;
           flex-direction: column;
@@ -205,7 +278,7 @@ export default (props) => {
           font-size: 1.3em;
           margin-bottom: 1em;
           width: 100%;
-          padding: .2em .5em;
+          padding: 0.2em 0.5em;
           color: royalblue;
           font-family: 'SF Mono', Menlo, monospace;
           border: none;
@@ -219,8 +292,8 @@ export default (props) => {
           color: ${colors.fg};
           position: relative;
           max-width: 500px;
-          width: 100%;
-          padding: 1em;
+          width: 320px;
+          padding: 10px 10px 30px 10px;
           border: 1px solid black;
           border-radius: 5px;
           display: flex;
@@ -234,11 +307,12 @@ export default (props) => {
         }
         article > label {
           margin: 1em;
-          padding: .2em .5em;
+          padding: 0.2em 0.5em;
           text-decoration: underline;
         }
         .picker {
           position: absolute;
+          z-index: 100;
         }
         button {
           margin-top: 1em;
@@ -246,7 +320,7 @@ export default (props) => {
           font-family: 'SF Mono', Menlo, monospace;
           background-color: royalblue;
           color: white;
-          padding: .5em 2em;
+          padding: 0.5em 2em;
           border: 1px solid royalblue;
           border-radius: 3px;
         }
@@ -257,5 +331,6 @@ export default (props) => {
           text-decoration: underline;
         }
       `}</style>
-  </div>
+    </div>
+  )
 }
