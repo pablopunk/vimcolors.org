@@ -244,7 +244,7 @@ export default (props) => {
               backgroundColor: colors.menus,
             }}
           >
-            <span>accent/color</span>
+            <span>accent/color.js</span>
             {pickers.menus && (
               <div
                 className="picker"
