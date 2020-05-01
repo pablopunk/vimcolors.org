@@ -2,7 +2,48 @@ import React, { useState, useEffect } from 'react'
 import ReactDom from 'react-dom'
 import { SketchPicker as Picker } from 'react-color'
 import sick from 'sick-colors'
+import styled from 'styled-components'
 import { generate } from '../lib/file'
+
+const StyledInput = styled.input`
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  width: 100%;
+  padding: 0.2em 0.5em;
+  font-family: 'SF Mono', Menlo, monospace;
+  border: none;
+  border-bottom: 1px solid royalblue;
+  color: royalblue;
+  background-color: white;
+
+  &:focus {
+    outline: none;
+  }
+
+  .dark & {
+    color: DarkTurquoise;
+    border-bottom: 1px solid DarkTurquoise;
+    background-color: black;
+  }
+`
+
+const StyledDownloadButton = styled.button`
+  margin-top: 1em;
+  font-size: 1.2em;
+  font-family: 'SF Mono', Menlo, monospace;
+  background-color: royalblue;
+  color: white;
+  padding: 0.5em 2em;
+  border: 1px solid royalblue;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: white;
+    color: royalblue;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`
 
 const defaults = {
   dark: {
@@ -46,7 +87,7 @@ export default (props) => {
     color5: false,
     color6: false,
   })
-  const wrapperRefs = {}
+  const wrapperRefs: any = {}
 
   for (let picker in pickers) {
     wrapperRefs[picker] = React.createRef()
@@ -125,7 +166,7 @@ export default (props) => {
   return (
     <div>
       <div className="terminal-wrapper">
-        <input
+        <StyledInput
           onChange={(ev) => handleNameChange(ev)}
           type="text"
           placeholder="Choose a name"
@@ -261,7 +302,9 @@ export default (props) => {
             )}
           </div>
         </section>
-        <button onClick={() => downloadClicked()}>Download</button>
+        <StyledDownloadButton onClick={() => downloadClicked()}>
+          ⬇ Download
+        </StyledDownloadButton>
       </div>
       <style jsx>{`
         .statusline {
@@ -273,19 +316,6 @@ export default (props) => {
           display: flex;
           flex-direction: column;
           align-items: center;
-        }
-        input {
-          font-size: 1.3em;
-          margin-bottom: 1em;
-          width: 100%;
-          padding: 0.2em 0.5em;
-          color: royalblue;
-          font-family: 'SF Mono', Menlo, monospace;
-          border: none;
-          border-bottom: 1px solid royalblue;
-        }
-        input:focus {
-          outline: none;
         }
         section {
           background-color: ${colors.bg};
@@ -313,22 +343,6 @@ export default (props) => {
         .picker {
           position: absolute;
           z-index: 100;
-        }
-        button {
-          margin-top: 1em;
-          font-size: 1.2em;
-          font-family: 'SF Mono', Menlo, monospace;
-          background-color: royalblue;
-          color: white;
-          padding: 0.5em 2em;
-          border: 1px solid royalblue;
-          border-radius: 3px;
-        }
-        button:hover {
-          background-color: white;
-          color: royalblue;
-          cursor: pointer;
-          text-decoration: underline;
         }
       `}</style>
     </div>

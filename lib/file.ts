@@ -1,4 +1,3 @@
-/* global Blob */
 'use strict'
 
 import vim from 'vim-colors'
