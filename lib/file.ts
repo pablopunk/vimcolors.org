@@ -5,7 +5,7 @@ import contrast from 'contrast'
 import { removeHash } from './colors'
 import { normalize } from './string'
 
-export function generate(name, colors) {
+export function generate(name, colors, darkOrLight: 'dark' | 'light') {
   const newColors = removeHash(colors)
 
   name = normalize(name)
@@ -14,7 +14,7 @@ export function generate(name, colors) {
   }
 
   const vimScript = vim(name, {
-    dark: contrast(colors.bg) === 'dark',
+    dark: darkOrLight === 'dark',
     ...newColors,
     scheme: [
       newColors.color1,

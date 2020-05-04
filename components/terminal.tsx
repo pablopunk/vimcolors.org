@@ -7,7 +7,7 @@ import { generate } from '../lib/file'
 
 const StyledInput = styled.input`
   font-size: 1.3em;
-  margin-bottom: 1em;
+  margin: 0.5em 0;
   width: 100%;
   padding: 0.2em 0.5em;
   font-family: 'SF Mono', Menlo, monospace;
@@ -27,10 +27,42 @@ const StyledInput = styled.input`
   }
 `
 
+const LightDarkButtons = styled.div`
+  margin: 0.5rem 0 1rem;
+  border-radius: 5px;
+  border: 1px solid #00000044;
+
+  .dark & {
+    border: 1px solid #ffffff44;
+  }
+`
+
+const LightDarkButton = styled.button<{
+  selected: boolean
+}>`
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: bold;
+  background-color: transparent;
+  color: black;
+  background-color: ${(props) =>
+    props.selected ? '#4169e144' : 'transparent'};
+  opacity: ${(props) => (props.selected ? 1 : 0.5)};
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+
+  .dark & {
+    color: white;
+    background-color: ${(props) =>
+      props.selected ? '#ffffff22' : 'transparent'};
+  }
+`
+
 const StyledDownloadButton = styled.button`
   margin-top: 1em;
   font-size: 1.2em;
-  font-family: 'SF Mono', Menlo, monospace;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: royalblue;
   color: white;
   padding: 0.5em 2em;
@@ -47,30 +79,16 @@ const StyledDownloadButton = styled.button`
 `
 
 const defaults = {
-  dark: {
-    bg: sick.background,
-    fg: sick.foreground,
-    comments: sick.magenta,
-    menus: sick.black,
-    color1: sick.red,
-    color2: sick.green,
-    color3: sick.yellow,
-    color4: sick.blue,
-    color5: sick.magenta,
-    color6: sick.cyan,
-  },
-  light: {
-    bg: sick.light.background,
-    fg: sick.light.foreground,
-    comments: sick.light.magenta,
-    menus: sick.light.white,
-    color1: sick.light.red,
-    color2: sick.light.green,
-    color3: sick.light.yellow,
-    color4: sick.light.blue,
-    color5: sick.light.magenta,
-    color6: sick.light.cyan,
-  },
+  bg: sick.background,
+  fg: sick.foreground,
+  comments: sick.magenta,
+  menus: sick.black,
+  color1: sick.red,
+  color2: sick.green,
+  color3: sick.yellow,
+  color4: sick.blue,
+  color5: sick.magenta,
+  color6: sick.cyan,
 }
 const StatusLine = styled.div`
   position: absolute;
@@ -117,9 +135,10 @@ const StyledPicker = styled.div<{
   z-index: 100;
 `
 
-export default (props) => {
+export default () => {
   const [name, setName] = useState('')
-  const [colors, setColors] = useState({ ...defaults[props.theme] })
+  const [darkLight, setDarkLight] = useState('dark' as 'dark' | 'light')
+  const [colors, setColors] = useState({ ...defaults })
   const [pickers, setPickers] = useState({
     bg: false,
     fg: false,
@@ -137,10 +156,6 @@ export default (props) => {
   for (let picker in pickers) {
     wrapperRefs[picker] = React.createRef()
   }
-
-  useEffect(() => {
-    setColors({ ...defaults[props.theme] })
-  }, [props.theme])
 
   useEffect(() => {
     document.addEventListener('mousedown', (ev) => handleClickOutside(ev))
@@ -163,7 +178,7 @@ export default (props) => {
   }
 
   function downloadClicked() {
-    generate(name, colors)
+    generate(name, colors, darkLight)
   }
 
   function pickerClicked(which) {
@@ -217,6 +232,20 @@ export default (props) => {
           placeholder="Choose a name"
           value={name}
         />
+        <LightDarkButtons>
+          <LightDarkButton
+            selected={darkLight === 'dark'}
+            onClick={() => setDarkLight('dark')}
+          >
+            Dark
+          </LightDarkButton>
+          <LightDarkButton
+            selected={darkLight === 'light'}
+            onClick={() => setDarkLight('light')}
+          >
+            Light
+          </LightDarkButton>
+        </LightDarkButtons>
         <StyledSection colors={colors}>
           <div>
             <StyledArticle>

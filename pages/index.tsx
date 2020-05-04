@@ -99,80 +99,63 @@ const StyledContainer = styled.div`
   }
 `
 
-export default () => {
-  const [theme, setTheme] = useState('dark')
-
-  function toggleTheme() {
-    if (theme === 'dark') {
-      setTheme('light')
-    } else {
-      setTheme('dark')
-    }
-  }
-
-  return (
-    <Layout>
-      <Head>
-        <title>Vim colors | Generate your custom colorscheme</title>
-      </Head>
-      <StyledTop>
-        <ToggleThemeButton
-          onClick={() => {
-            window['__toggleDarkMode']?.()
-          }}
-        >
-          💡
-        </ToggleThemeButton>
-      </StyledTop>
-      <StyledContainer>
-        <ForkMe
-          position="right"
-          color="black"
-          href="//github.com/pablopunk/vimcolors.org"
-          target="_blank"
-        >
-          Source on GitHub
-        </ForkMe>
-        <a href="/">
-          <h1>Vim Colors</h1>
-        </a>
-        <small>`Generate your own vim colorschemes`</small>
-        <article>
-          <StyledH2>1. </StyledH2>
-          <InlineP>
-            Choose below your favorite colors and they will become a vim
-            colorscheme!
-          </InlineP>
-        </article>
-        <article>
-          <StyledButton onClick={() => toggleTheme()}>
-            Toggle dark/light
-          </StyledButton>
-        </article>
-        <Terminal theme={theme} />
-        <article>
-          <StyledH2>2. </StyledH2>
-          <InlineP>
-            Now you can <StyledCode>:source 'path/to/your/file.vim'</StyledCode>{' '}
-            inside vim or neovim.
-          </InlineP>
-        </article>
+export default () => (
+  <Layout>
+    <Head>
+      <title>Vim colors | Generate your custom colorscheme</title>
+    </Head>
+    <StyledTop>
+      <ToggleThemeButton
+        onClick={() => {
+          window['__toggleDarkMode']?.()
+        }}
+      >
+        💡
+      </ToggleThemeButton>
+    </StyledTop>
+    <StyledContainer>
+      <ForkMe
+        position="right"
+        color="black"
+        href="//github.com/pablopunk/vimcolors.org"
+        target="_blank"
+      >
+        Source on GitHub
+      </ForkMe>
+      <a href="/">
+        <h1>Vim Colors</h1>
+      </a>
+      <small>`Generate your own vim colorschemes`</small>
+      <article>
+        <StyledH2>1. </StyledH2>
         <InlineP>
-          Alternatively, you can publish it via github and use it as any other
-          plugin. Checkout the examples below.
+          Choose below your favorite colors and they will become a vim
+          colorscheme!
         </InlineP>
-        <section>
-          <h3>Some examples of generated schemes</h3>
-          <ul>
-            <li>
-              <a href="https://github.com/pablopunk/sick.vim">sick.vim</a>
-            </li>
-            <li>
-              <a href="https://github.com/pablopunk/sunset.vim">sunset.vim</a>
-            </li>
-          </ul>
-        </section>
-      </StyledContainer>
-    </Layout>
-  )
-}
+      </article>
+      <Terminal />
+      <article>
+        <StyledH2>2. </StyledH2>
+        <InlineP>
+          Now you can <StyledCode>:source 'path/to/your/file.vim'</StyledCode>{' '}
+          inside vim or neovim.
+        </InlineP>
+      </article>
+      <InlineP>
+        Alternatively, you can publish it via github and use it as any other
+        plugin. Checkout the examples below.
+      </InlineP>
+      <section>
+        <h3>Some examples of generated schemes</h3>
+        <ul>
+          <li>
+            <a href="https://github.com/pablopunk/sick.vim">sick.vim</a>
+          </li>
+          <li>
+            <a href="https://github.com/pablopunk/sunset.vim">sunset.vim</a>
+          </li>
+        </ul>
+      </section>
+    </StyledContainer>
+  </Layout>
+)
