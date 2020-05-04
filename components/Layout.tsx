@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
 
 export default ({ children }) => (
   <>
-    <GlobalStyle />
     <StyledMain>{children}</StyledMain>
+    <GlobalStyle />
   </>
 )

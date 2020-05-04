@@ -36,6 +36,7 @@ const StyledDownloadButton = styled.button`
   padding: 0.5em 2em;
   border: 1px solid royalblue;
   border-radius: 3px;
+  text-align: center;
 
   &:hover {
     background-color: white;
@@ -71,6 +72,50 @@ const defaults = {
     color6: sick.light.cyan,
   },
 }
+const StatusLine = styled.div`
+  position: absolute;
+  bottom: 10px;
+  width: calc(100% - 20px);
+`
+const TerminalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const StyledSection = styled.section<{
+  colors: any
+}>`
+  background-color: ${(props) => props.colors.bg};
+  color: ${(props) => props.colors.fg};
+  position: relative;
+  max-width: 500px;
+  width: 320px;
+  padding: 10px 10px 30px 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+`
+
+const StyledArticle = styled.article`
+  margin: 1em 0;
+  label {
+    margin: 1em;
+    padding: 0.2em 0.5em;
+    text-decoration: underline;
+  }
+`
+
+const StyledPicker = styled.div<{
+  right: boolean
+  left: boolean
+}>`
+  position: absolute;
+  ${(props) => (props.right ? 'right: 0;' : '')}
+  ${(props) => (props.left ? 'left: 0;' : '')}
+  z-index: 100;
+`
 
 export default (props) => {
   const [name, setName] = useState('')
@@ -165,16 +210,16 @@ export default (props) => {
 
   return (
     <div>
-      <div className="terminal-wrapper">
+      <TerminalWrapper>
         <StyledInput
           onChange={(ev) => handleNameChange(ev)}
           type="text"
           placeholder="Choose a name"
           value={name}
         />
-        <section>
+        <StyledSection colors={colors}>
           <div>
-            <article>
+            <StyledArticle>
               <label
                 onClick={(ev) => {
                   pickerClicked('bg')
@@ -184,8 +229,7 @@ export default (props) => {
                 Background
               </label>
               {pickers.bg && (
-                <div
-                  className="picker"
+                <StyledPicker
                   onClick={(ev) => ev.stopPropagation()}
                   ref={wrapperRefs.bg}
                 >
@@ -193,10 +237,10 @@ export default (props) => {
                     color={colors.bg}
                     onChangeComplete={(color) => changeColor('bg', color.hex)}
                   />
-                </div>
+                </StyledPicker>
               )}
-            </article>
-            <article>
+            </StyledArticle>
+            <StyledArticle>
               <label
                 onClick={(ev) => {
                   pickerClicked('fg')
@@ -206,8 +250,7 @@ export default (props) => {
                 Foreground
               </label>
               {pickers.fg && (
-                <div
-                  className="picker"
+                <StyledPicker
                   onClick={(ev) => ev.stopPropagation()}
                   ref={wrapperRefs.fg}
                 >
@@ -215,10 +258,10 @@ export default (props) => {
                     color={colors.fg}
                     onChangeComplete={(color) => changeColor('fg', color.hex)}
                   />
-                </div>
+                </StyledPicker>
               )}
-            </article>
-            <article>
+            </StyledArticle>
+            <StyledArticle>
               <label
                 onClick={(ev) => {
                   pickerClicked('comments')
@@ -231,8 +274,7 @@ export default (props) => {
                 // Comments
               </label>
               {pickers.comments && (
-                <div
-                  className="picker"
+                <StyledPicker
                   onClick={(ev) => ev.stopPropagation()}
                   ref={wrapperRefs.comments}
                 >
@@ -242,13 +284,13 @@ export default (props) => {
                       changeColor('comments', color.hex)
                     }
                   />
-                </div>
+                </StyledPicker>
               )}
-            </article>
+            </StyledArticle>
           </div>
           <div>
             {[1, 2, 3, 4, 5, 6].map((colorN) => (
-              <article key={'color' + colorN}>
+              <StyledArticle key={'color' + colorN}>
                 <label
                   onClick={(ev) => {
                     pickerClicked('color' + colorN)
@@ -259,8 +301,8 @@ export default (props) => {
                   Color {colorN}
                 </label>
                 {pickers['color' + colorN] && (
-                  <div
-                    className="picker"
+                  <StyledPicker
+                    right
                     onClick={(ev) => ev.stopPropagation()}
                     ref={wrapperRefs['color' + colorN]}
                   >
@@ -270,13 +312,12 @@ export default (props) => {
                         changeColor('color' + colorN, color.hex)
                       }
                     />
-                  </div>
+                  </StyledPicker>
                 )}
-              </article>
+              </StyledArticle>
             ))}
           </div>
-          <div
-            className="statusline"
+          <StatusLine
             onClick={(ev) => {
               pickerClicked('menus')
               ev.stopPropagation()
@@ -287,8 +328,7 @@ export default (props) => {
           >
             <span>accent/color.js</span>
             {pickers.menus && (
-              <div
-                className="picker"
+              <StyledPicker
                 onClick={(ev) => ev.stopPropagation()}
                 ref={wrapperRefs.menus}
               >
@@ -298,53 +338,14 @@ export default (props) => {
                     changeColor('menus', color.hex)
                   }}
                 />
-              </div>
+              </StyledPicker>
             )}
-          </div>
-        </section>
+          </StatusLine>
+        </StyledSection>
         <StyledDownloadButton onClick={() => downloadClicked()}>
           ⬇ Download
         </StyledDownloadButton>
-      </div>
-      <style jsx>{`
-        .statusline {
-          position: absolute;
-          bottom: 10px;
-          width: calc(100% - 20px);
-        }
-        .terminal-wrapper {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        section {
-          background-color: ${colors.bg};
-          color: ${colors.fg};
-          position: relative;
-          max-width: 500px;
-          width: 320px;
-          padding: 10px 10px 30px 10px;
-          border: 1px solid black;
-          border-radius: 5px;
-          display: flex;
-          justify-content: space-between;
-        }
-        .pull-right {
-          float: right;
-        }
-        article {
-          margin: 1em 0;
-        }
-        article > label {
-          margin: 1em;
-          padding: 0.2em 0.5em;
-          text-decoration: underline;
-        }
-        .picker {
-          position: absolute;
-          z-index: 100;
-        }
-      `}</style>
+      </TerminalWrapper>
     </div>
   )
 }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import Head from 'next/head'
 import ForkMe from 'react-github-fork-ribbon'
+import Layout from '../components/Layout'
 import Terminal from '../components/terminal'
 import styled from 'styled-components'
 
@@ -109,7 +111,10 @@ export default () => {
   }
 
   return (
-    <div>
+    <Layout>
+      <Head>
+        <title>Vim colors | Generate your custom colorscheme</title>
+      </Head>
       <StyledTop>
         <ToggleThemeButton
           onClick={() => {
@@ -168,6 +173,6 @@ export default () => {
           </ul>
         </section>
       </StyledContainer>
-    </div>
+    </Layout>
   )
 }
