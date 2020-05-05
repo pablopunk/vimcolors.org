@@ -30,7 +30,7 @@
     "react-dom": "^16.13.1",
     "react-github-fork-ribbon": "^0.6.0",
     "sick-colors": "^3.0.3",
-    "styled-components": "^5.1.0",
+    "styled-components": "4.4.1",
     "vim-colors": "^5.0.0"
   },
   "husky": {
