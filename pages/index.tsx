@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
-import ForkMe from 'react-github-fork-ribbon'
 import Layout from '../components/Layout'
 import Terminal from '../components/terminal'
 import styled from 'styled-components'
