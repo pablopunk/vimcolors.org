@@ -114,14 +114,6 @@ export default () => (
       </ToggleThemeButton>
     </StyledTop>
     <StyledContainer>
-      <ForkMe
-        position="right"
-        color="black"
-        href="//github.com/pablopunk/vimcolors.org"
-        target="_blank"
-      >
-        Source on GitHub
-      </ForkMe>
       <a href="/">
         <h1>Vim Colors</h1>
       </a>
