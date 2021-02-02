@@ -144,17 +144,13 @@ export default class extends Document {
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
           <meta name="theme-color" content="#ffffff" />
+          <script data-goatcounter="/goat" async src="/count.js"></script>
         </Head>
         <body>
           <script dangerouslySetInnerHTML={{ __html: darkModeCode }} />
           <div dangerouslySetInnerHTML={{ __html: seeOnGithubCode }} />
           <Main />
           <NextScript />
-          <script
-            data-goatcounter="https://vimcolors.goatcounter.com/count"
-            async
-            src="//gc.zgo.at/count.js"
-          ></script>
         </body>
       </Html>
     )
