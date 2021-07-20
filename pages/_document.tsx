@@ -52,25 +52,6 @@ export default class extends Document {
     return (
       <Html>
         <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta
-            name="description"
-            content="Choose up to 6 colors of your choisec. Then, generate a custom colorscheme for vim based only on those colors and export it to a vim-compatible file"
-          />
-          <meta
-            name="keywords"
-            content="vim,colors,scheme,colorscheme,generator,generate,website,modern,minimalistic,tool,palette,background,foreground,file"
-          />
-          <link rel="canonical" href="https://vimcolors.org" />
-          <meta property="og:title" content="Vim colors generator" />
-          <meta property="og:site_name" content="vimcolors" />
-          <meta property="og:url" content="https://vimcolors.org" />
-          <meta
-            property="og:description"
-            content="Choose up to 6 colors of your choisec. Then, generate a custom colorscheme for vim based only on those colors and export it to a vim-compatible file"
-          />
-          <meta property="og:type" content="website" />
-          <meta property="og:image" content="https://files-ev2m8ckfp.now.sh/" />
           <link
             rel="apple-touch-icon"
             sizes="57x57"

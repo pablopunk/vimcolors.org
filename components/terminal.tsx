@@ -135,7 +135,7 @@ const StyledPicker = styled.div<{
   z-index: 100;
 `
 
-export default () => {
+const Terminal = () => {
   const [name, setName] = useState('')
   const [darkLight, setDarkLight] = useState('dark' as 'dark' | 'light')
   const [colors, setColors] = useState({ ...defaults })
@@ -378,3 +378,5 @@ export default () => {
     </div>
   )
 }
+
+export default Terminal

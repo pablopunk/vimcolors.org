@@ -98,7 +98,7 @@ const StyledContainer = styled.div`
   }
 `
 
-export default () => (
+const Index = () => (
   <Layout>
     <Head>
       <title>Vim colors | Generate your custom colorscheme</title>
@@ -150,3 +150,5 @@ export default () => (
     </StyledContainer>
   </Layout>
 )
+
+export default Index
