@@ -14,7 +14,7 @@ const Layout = ({ children }) => (
           'Choose up to 6 colors of your choice. Then, generate a custom colorscheme for vim based only on those colors and export it to a vim-compatible file',
         images: [
           {
-            url: '/images/preview.png',
+            url: 'https://vimcolors.org/images/preview.png',
           },
         ],
       }}
