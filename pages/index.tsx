@@ -1,38 +1,20 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
-import Layout from '../components/Layout'
 import Terminal from '../components/terminal'
 import styled from 'styled-components'
+import { BiMoon, BiSun } from 'react-icons/bi'
 
-const StyledTop = styled.div``
-
-const ToggleThemeButton = styled.button`
-  background: transparent;
-  border: transparent;
-  outline: none;
-  cursor: pointer;
-  font-size: 1rem;
-
-  &:hover {
-    opacity: 0.7;
-  }
-`
-
-const StyledH2 = styled.h2`
-  color: royalblue;
+const St = styled.h2`
+  color: var(--color-accent);
   .dark & {
     color: DarkTurquoise;
   }
   display: inline;
 `
 
-const InlineP = styled.p`
-  display: inline;
-`
-
 const StyledCode = styled.code`
   font-size: 1.4em;
-  color: royalblue;
+  color: var(--color-accent);
   .dark & {
     color: DarkTurquoise;
   }
@@ -49,7 +31,7 @@ const StyledButton = styled.button`
   color: black;
 
   &:hover {
-    color: royalblue;
+    color: var(--color-accent);
   }
 
   .dark & {
@@ -63,82 +45,55 @@ const StyledButton = styled.button`
   }
 `
 
-const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 2rem;
-
-  & h1 {
-    color: tomato;
-    margin-bottom: 5px;
-  }
-
-  & article {
-    margin-top: 1em;
-  }
-
-  & small {
-    background-color: aquamarine;
-    color: #333;
-    padding: 2px;
-  }
-
-  & a {
-    color: tomato;
-    text-decoration: none;
-  }
-
-  & ul {
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
-`
-
 const Index = () => (
-  <Layout>
+  <>
     <Head>
       <title>Vim colors | Generate your custom colorscheme</title>
     </Head>
-    <StyledTop>
-      <ToggleThemeButton
+    <div>
+      <button
         onClick={() => {
           window['__toggleDarkMode']?.()
         }}
+        className="border p-2 flex items-center justify-center rounded-full hover:bg-accent2 hover:text-bg transition-colors"
       >
-        💡
-      </ToggleThemeButton>
-    </StyledTop>
-    <StyledContainer>
+        <div className="dark:hidden">
+          <BiMoon />
+        </div>
+        <div className="hidden dark:flex">
+          <BiSun />
+        </div>
+      </button>
+    </div>
+    <div className="flex flex-col items-center">
       <a href="/">
-        <h1>Vim Colors</h1>
+        <h1 className="text-3xl text-accent-alt my-3">Vim Colors</h1>
       </a>
-      <small>`Generate your own vim colorschemes`</small>
-      <article>
-        <StyledH2>1. </StyledH2>
-        <InlineP>
+      <h2 className="mb-3 bg-accent text-bg px-2 text-md">
+        `Generate your own vim colorschemes`
+      </h2>
+      <article className="bg-bg2 py-5 px-4 rounded-xl shadow-lg">
+        <h3 className="inline text-accent text-xl mr-2">1.</h3>
+        <span>
           Choose below your favorite colors and they will become a vim
           colorscheme!
-        </InlineP>
+        </span>
+        <Terminal />
       </article>
-      <Terminal />
-      <article>
-        <StyledH2>2. </StyledH2>
-        <InlineP>
+      <article className="bg-bg2 py-5 px-4 rounded-xl shadow-lg mt-4">
+        <h3 className="inline text-accent text-xl mr-2">2.</h3>
+        <span>
           Now you can <StyledCode>:source 'path/to/your/file.vim'</StyledCode>{' '}
           inside vim or neovim.
-        </InlineP>
+        </span>
       </article>
-      <InlineP>
+      <span className="mt-6">
         Alternatively, you can publish it via github and use it as any other
-        plugin. Checkout the examples below.
-      </InlineP>
-      <section>
-        <h3>Some examples of generated schemes</h3>
-        <ul>
+        plugin. Checkout the examples below:
+      </span>
+      <section className="self-start my-3">
+        <h4 className="font-semibold">Generated themes</h4>
+        <ul className="text-accent-alt font-semibold underline">
           <li>
             <a href="https://github.com/pablopunk/sick.vim">sick.vim</a>
           </li>
@@ -147,8 +102,8 @@ const Index = () => (
           </li>
         </ul>
       </section>
-    </StyledContainer>
-  </Layout>
+    </div>
+  </>
 )
 
 export default Index

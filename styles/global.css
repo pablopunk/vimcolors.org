@@ -1,0 +1,39 @@
+:root {
+  --color-fg: #333;
+  --color-bg: rgb(251, 251, 251);
+  --color-bg2: white;
+  --color-accent: rgb(68, 107, 225);
+  --color-accent2: rgb(42, 72, 162);
+  --color-accent3: rgb(31, 55, 126);
+  --color-accent-alt: tomato;
+  --color-border: rgb(223, 223, 223);
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  color: #333;
+
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}
+
+body.dark {
+  --color-fg: #efefef;
+  --color-bg: black;
+  --color-bg2: rgb(31, 31, 31);
+  --color-accent: rgb(0, 188, 191);
+  --color-accent2: rgb(3, 211, 215);
+  --color-accent3: rgb(0, 236, 240);
+  --color-accent-alt: tomato;
+  --color-border: #ffffff44;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1em;
+  font-family: 'SF Mono', Menlo, monospace;
+}

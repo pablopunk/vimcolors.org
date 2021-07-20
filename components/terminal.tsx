@@ -4,78 +4,12 @@ import { SketchPicker as Picker } from 'react-color'
 import sick from 'sick-colors'
 import styled from 'styled-components'
 import { generate } from '../lib/file'
-
-const StyledInput = styled.input`
-  font-size: 1.3em;
-  margin: 0.5em 0;
-  width: 100%;
-  padding: 0.2em 0.5em;
-  font-family: 'SF Mono', Menlo, monospace;
-  border: none;
-  border-bottom: 1px solid royalblue;
-  color: royalblue;
-  background-color: white;
-
-  &:focus {
-    outline: none;
-  }
-
-  .dark & {
-    color: DarkTurquoise;
-    border-bottom: 1px solid DarkTurquoise;
-    background-color: black;
-  }
-`
+import classNames from 'classnames'
 
 const LightDarkButtons = styled.div`
   margin: 0.5rem 0 1rem;
-  border-radius: 5px;
-  border: 1px solid #00000044;
-
-  .dark & {
-    border: 1px solid #ffffff44;
-  }
-`
-
-const LightDarkButton = styled.button<{
-  selected: boolean
-}>`
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: bold;
-  background-color: transparent;
-  color: black;
-  background-color: ${(props) =>
-    props.selected ? '#4169e144' : 'transparent'};
-  opacity: ${(props) => (props.selected ? 1 : 0.5)};
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 0.4rem 1rem;
-
-  .dark & {
-    color: white;
-    background-color: ${(props) =>
-      props.selected ? '#ffffff22' : 'transparent'};
-  }
-`
-
-const StyledDownloadButton = styled.button`
-  margin-top: 1em;
-  font-size: 1.2em;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: royalblue;
-  color: white;
-  padding: 0.5em 2em;
-  border: 1px solid royalblue;
-  border-radius: 3px;
-  text-align: center;
-
-  &:hover {
-    background-color: white;
-    color: royalblue;
-    cursor: pointer;
-    text-decoration: underline;
-  }
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
 `
 
 const defaults = {
@@ -94,11 +28,7 @@ const StatusLine = styled.div`
   position: absolute;
   bottom: 10px;
   width: calc(100% - 20px);
-`
-const TerminalWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  left: 10px;
 `
 
 const StyledSection = styled.section<{
@@ -106,23 +36,6 @@ const StyledSection = styled.section<{
 }>`
   background-color: ${(props) => props.colors.bg};
   color: ${(props) => props.colors.fg};
-  position: relative;
-  max-width: 500px;
-  width: 320px;
-  padding: 10px 10px 30px 10px;
-  border: 1px solid black;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-`
-
-const StyledArticle = styled.article`
-  margin: 1em 0;
-  label {
-    margin: 1em;
-    padding: 0.2em 0.5em;
-    text-decoration: underline;
-  }
 `
 
 const StyledPicker = styled.div<{
@@ -225,156 +138,188 @@ const Terminal = () => {
 
   return (
     <div>
-      <TerminalWrapper>
-        <StyledInput
+      <div className="flex flex-col items-center">
+        <input
           onChange={(ev) => handleNameChange(ev)}
           type="text"
           placeholder="Choose a name"
           value={name}
+          className="border my-3 text-xl p-3 text-accent focus:outline-none bg-bg rounded-md"
         />
-        <LightDarkButtons>
-          <LightDarkButton
-            selected={darkLight === 'dark'}
+        <div className="mb-4 bg-bg rounded-full border shadow-md p-[2px]">
+          <button
             onClick={() => setDarkLight('dark')}
+            className={classNames(
+              'font-sans font-semibold px-3 py-1 rounded-full transition-colors mr-1',
+              {
+                'bg-accent2 text-bg': darkLight === 'dark',
+                'opacity-60': darkLight === 'light',
+              }
+            )}
           >
             Dark
-          </LightDarkButton>
-          <LightDarkButton
-            selected={darkLight === 'light'}
+          </button>
+          <button
             onClick={() => setDarkLight('light')}
+            className={classNames(
+              'font-sans font-semibold px-3 py-1 rounded-full transition-colors',
+              {
+                'bg-accent2 text-bg': darkLight === 'light',
+                'opacity-60': darkLight === 'dark',
+              }
+            )}
           >
             Light
-          </LightDarkButton>
-        </LightDarkButtons>
-        <StyledSection colors={colors}>
-          <div>
-            <StyledArticle>
-              <label
-                onClick={(ev) => {
-                  pickerClicked('bg')
-                  ev.stopPropagation()
-                }}
-              >
-                Background
-              </label>
-              {pickers.bg && (
-                <StyledPicker
-                  onClick={(ev) => ev.stopPropagation()}
-                  ref={wrapperRefs.bg}
-                >
-                  <Picker
-                    color={colors.bg}
-                    onChangeComplete={(color) => changeColor('bg', color.hex)}
-                  />
-                </StyledPicker>
-              )}
-            </StyledArticle>
-            <StyledArticle>
-              <label
-                onClick={(ev) => {
-                  pickerClicked('fg')
-                  ev.stopPropagation()
-                }}
-              >
-                Foreground
-              </label>
-              {pickers.fg && (
-                <StyledPicker
-                  onClick={(ev) => ev.stopPropagation()}
-                  ref={wrapperRefs.fg}
-                >
-                  <Picker
-                    color={colors.fg}
-                    onChangeComplete={(color) => changeColor('fg', color.hex)}
-                  />
-                </StyledPicker>
-              )}
-            </StyledArticle>
-            <StyledArticle>
-              <label
-                onClick={(ev) => {
-                  pickerClicked('comments')
-                  ev.stopPropagation()
-                }}
-                style={{
-                  color: colors.comments,
-                }}
-              >
-                // Comments
-              </label>
-              {pickers.comments && (
-                <StyledPicker
-                  onClick={(ev) => ev.stopPropagation()}
-                  ref={wrapperRefs.comments}
-                >
-                  <Picker
-                    color={colors.comments}
-                    onChangeComplete={(color) =>
-                      changeColor('comments', color.hex)
-                    }
-                  />
-                </StyledPicker>
-              )}
-            </StyledArticle>
+          </button>
+        </div>
+        <StyledSection
+          colors={colors}
+          className="rounded-md shadow-lg pb-[40px] relative w-[350px]"
+        >
+          <div className="relative bg-[rgb(60,80,80)] w-full h-[23px] flex items-center pl-1 rounded-t-md">
+            <div className="bg-[rgb(255,95,87)] rounded-full w-3 h-3 mx-1" />
+            <div className="bg-[rgb(255,188,46)] rounded-full w-3 h-3 mx-1" />
+            <div className="bg-[rgb(43,200,64)] rounded-full w-3 h-3 mx-1" />
           </div>
-          <div>
-            {[1, 2, 3, 4, 5, 6].map((colorN) => (
-              <StyledArticle key={'color' + colorN}>
+          <div className="flex justify-between w-full px-5 py-6">
+            <div>
+              <div className="pb-2">
                 <label
                   onClick={(ev) => {
-                    pickerClicked('color' + colorN)
+                    pickerClicked('bg')
                     ev.stopPropagation()
                   }}
-                  style={{ color: colors['color' + colorN] }}
+                  className="underline transition-opacity hover:opacity-60 cursor-pointer"
                 >
-                  Color {colorN}
+                  Background
                 </label>
-                {pickers['color' + colorN] && (
+                {pickers.bg && (
                   <StyledPicker
-                    right
                     onClick={(ev) => ev.stopPropagation()}
-                    ref={wrapperRefs['color' + colorN]}
+                    ref={wrapperRefs.bg}
                   >
                     <Picker
-                      color={colors['color' + colorN]}
+                      color={colors.bg}
+                      onChangeComplete={(color) => changeColor('bg', color.hex)}
+                    />
+                  </StyledPicker>
+                )}
+              </div>
+              <div className="pb-2">
+                <label
+                  onClick={(ev) => {
+                    pickerClicked('fg')
+                    ev.stopPropagation()
+                  }}
+                  className="underline transition-opacity hover:opacity-60 cursor-pointer"
+                >
+                  Foreground
+                </label>
+                {pickers.fg && (
+                  <StyledPicker
+                    onClick={(ev) => ev.stopPropagation()}
+                    ref={wrapperRefs.fg}
+                  >
+                    <Picker
+                      color={colors.fg}
+                      onChangeComplete={(color) => changeColor('fg', color.hex)}
+                    />
+                  </StyledPicker>
+                )}
+              </div>
+              <div>
+                <label
+                  onClick={(ev) => {
+                    pickerClicked('comments')
+                    ev.stopPropagation()
+                  }}
+                  style={{
+                    color: colors.comments,
+                  }}
+                  className="underline transition-opacity hover:opacity-60 cursor-pointer"
+                >
+                  // Comments
+                </label>
+                {pickers.comments && (
+                  <StyledPicker
+                    onClick={(ev) => ev.stopPropagation()}
+                    ref={wrapperRefs.comments}
+                  >
+                    <Picker
+                      color={colors.comments}
                       onChangeComplete={(color) =>
-                        changeColor('color' + colorN, color.hex)
+                        changeColor('comments', color.hex)
                       }
                     />
                   </StyledPicker>
                 )}
-              </StyledArticle>
-            ))}
+              </div>
+            </div>
+            <div>
+              {[1, 2, 3, 4, 5, 6].map((colorN) => (
+                <div key={'color' + colorN} className="pb-2">
+                  <label
+                    onClick={(ev) => {
+                      pickerClicked('color' + colorN)
+                      ev.stopPropagation()
+                    }}
+                    style={{ color: colors['color' + colorN] }}
+                    className="underline transition-opacity hover:opacity-60 cursor-pointer"
+                  >
+                    Color {colorN}
+                  </label>
+                  {pickers['color' + colorN] && (
+                    <StyledPicker
+                      right
+                      onClick={(ev) => ev.stopPropagation()}
+                      ref={wrapperRefs['color' + colorN]}
+                    >
+                      <Picker
+                        color={colors['color' + colorN]}
+                        onChangeComplete={(color) =>
+                          changeColor('color' + colorN, color.hex)
+                        }
+                      />
+                    </StyledPicker>
+                  )}
+                </div>
+              ))}
+            </div>
+            <StatusLine
+              onClick={(ev) => {
+                pickerClicked('menus')
+                ev.stopPropagation()
+              }}
+              style={{
+                backgroundColor: colors.menus,
+              }}
+            >
+              <span className="ml-1 underline cursor-pointer hover:opacity-60 transition-opacity">
+                statusline/color.js
+              </span>
+              {pickers.menus && (
+                <StyledPicker
+                  onClick={(ev) => ev.stopPropagation()}
+                  ref={wrapperRefs.menus}
+                >
+                  <Picker
+                    color={colors.menus}
+                    onChangeComplete={(color) => {
+                      changeColor('menus', color.hex)
+                    }}
+                  />
+                </StyledPicker>
+              )}
+            </StatusLine>
           </div>
-          <StatusLine
-            onClick={(ev) => {
-              pickerClicked('menus')
-              ev.stopPropagation()
-            }}
-            style={{
-              backgroundColor: colors.menus,
-            }}
-          >
-            <span>accent/color.js</span>
-            {pickers.menus && (
-              <StyledPicker
-                onClick={(ev) => ev.stopPropagation()}
-                ref={wrapperRefs.menus}
-              >
-                <Picker
-                  color={colors.menus}
-                  onChangeComplete={(color) => {
-                    changeColor('menus', color.hex)
-                  }}
-                />
-              </StyledPicker>
-            )}
-          </StatusLine>
         </StyledSection>
-        <StyledDownloadButton onClick={() => downloadClicked()}>
+        <button
+          onClick={() => downloadClicked()}
+          className="my-3 text-2xl border-accent3 text-bg bg-accent2 p-3 rounded-md shadow-md hover:bg-accent3 hover:scale-105 transition-all"
+        >
           ⬇ Download
-        </StyledDownloadButton>
-      </TerminalWrapper>
+        </button>
+      </div>
     </div>
   )
 }
