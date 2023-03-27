@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import ReactDom from 'react-dom'
 import { SketchPicker as Picker } from 'react-color'
 import sick from 'sick-colors'
 import styled from 'styled-components'
 import { generate } from '../lib/file'
 import classNames from 'classnames'
-
-const LightDarkButtons = styled.div`
-  margin: 0.5rem 0 1rem;
-  border-radius: 1rem;
-  border: 1px solid var(--color-border);
-`
+import { IoMdDownload } from 'react-icons/io'
 
 const defaults = {
   bg: sick.background,
@@ -48,7 +42,7 @@ const StyledPicker = styled.div<{
   z-index: 100;
 `
 
-const Terminal = () => {
+export const Terminal = () => {
   const [name, setName] = useState('')
   const [darkLight, setDarkLight] = useState('dark' as 'dark' | 'light')
   const [colors, setColors] = useState({ ...defaults })
@@ -137,7 +131,7 @@ const Terminal = () => {
   }
 
   return (
-    <div>
+    <section>
       <div className="flex flex-col items-center">
         <input
           onChange={(ev) => handleNameChange(ev)}
@@ -315,12 +309,12 @@ const Terminal = () => {
         </StyledSection>
         <button
           onClick={() => downloadClicked()}
-          className="my-3 text-2xl border-accent3 text-bg bg-accent2 p-3 rounded-md shadow-md hover:bg-accent3 hover:scale-105 transition-all"
+          className="flex gap-2 items-center my-3 text-2xl border-accent3 text-bg bg-accent2 p-3 rounded-md shadow-md hover:bg-accent3 hover:scale-105 transition-all"
         >
-          ⬇ Download
+          <IoMdDownload /> Download
         </button>
       </div>
-    </div>
+    </section>
   )
 }
 
