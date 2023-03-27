@@ -14,7 +14,7 @@ export const Generator = () => (
     <a href="/">
       <h1 className="text-3xl text-accent-alt my-3">Vim Colors</h1>
     </a>
-    <h2 className="mb-3 bg-accent text-bg px-2 text-md">
+    <h2 className="mb-3 bg-accent text-bg px-2 text-md text-center">
       `Generate your own vim colorschemes`
     </h2>
     <article className="bg-bg2 py-5 px-4 rounded-xl shadow-lg">
