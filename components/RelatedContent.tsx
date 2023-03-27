@@ -39,7 +39,7 @@ export const RelatedContent = () => (
             {article.title}
           </h3>
         </a>
-        <div className="opacity-50">
+        <div className="opacity-50 text-xs mt-1">
           by {article.author} on {article.date}
         </div>
       </article>
