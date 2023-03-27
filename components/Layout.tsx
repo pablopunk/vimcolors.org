@@ -1,5 +1,6 @@
 import { NextSeo } from 'next-seo'
 import React from 'react'
+import { BiMoon, BiSun } from 'react-icons/bi'
 
 const Layout = ({ children }) => (
   <>
@@ -23,6 +24,21 @@ const Layout = ({ children }) => (
       name="keywords"
       content="vim,colors,scheme,colorscheme,generator,generate,website,modern,minimalistic,tool,palette,background,foreground,file"
     />
+    <header className="p-4">
+      <button
+        onClick={() => {
+          window['__toggleDarkMode']?.()
+        }}
+        className="border p-2 flex items-center justify-center rounded-full hover:bg-accent2 hover:text-bg transition-colors"
+      >
+        <div className="dark:hidden">
+          <BiMoon />
+        </div>
+        <div className="hidden dark:flex">
+          <BiSun />
+        </div>
+      </button>
+    </header>
     <main>{children}</main>
   </>
 )

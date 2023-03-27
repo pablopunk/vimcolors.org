@@ -6,7 +6,7 @@
   --color-accent2: rgb(42, 72, 162);
   --color-accent3: rgb(31, 55, 126);
   --color-accent-alt: tomato;
-  --color-border: rgb(223, 223, 223);
+  --color-border: rgb(240, 240, 240);
 }
 
 body {
@@ -28,11 +28,11 @@ body.dark {
   --color-accent2: rgb(3, 211, 215);
   --color-accent3: rgb(0, 236, 240);
   --color-accent-alt: tomato;
-  --color-border: #ffffff44;
+  --color-border: #ffffff11;
 }
 
 main {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 1em;
   font-family: 'SF Mono', Menlo, monospace;
