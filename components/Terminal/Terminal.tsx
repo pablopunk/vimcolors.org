@@ -169,7 +169,10 @@ export const Terminal = () => {
     <>
       {activePicker && <Picker />}
       <section className="mt-4 relative">
-        <div className="relative bg-[rgb(60,80,80)] w-full h-[23px] flex items-center pl-1 rounded-t-md">
+        <div
+          className="relative w-full h-[23px] flex items-center pl-1 rounded-t-md"
+          style={{ backgroundColor: colors.menus }}
+        >
           <div className="bg-[rgb(255,95,87)] rounded-full w-3 h-3 mx-1" />
           <div className="bg-[rgb(255,188,46)] rounded-full w-3 h-3 mx-1" />
           <div className="bg-[rgb(43,200,64)] rounded-full w-3 h-3 mx-1" />

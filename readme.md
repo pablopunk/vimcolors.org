@@ -2,7 +2,8 @@
 
 > Customize your vim colors. Simple AF.
 
-![website](https://github.com/pablopunk/art/raw/master/vimcolors.org/vimcolors.org.png)
+![dark screenshot](./art/dark.png)
+![light screenshot](./art/light.png)
 
 ### Example schemes
 
