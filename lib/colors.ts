@@ -1,4 +1,16 @@
-type Colors = { [name: string]: string };
+export type Colors = {
+  bg?: string;
+  fg?: string;
+  comments?: string;
+  menus?: string;
+  color1?: string;
+  color2?: string;
+  color3?: string;
+  color4?: string;
+  color5?: string;
+  color6?: string;
+};
+export type Color = keyof Colors;
 
 export function removeHash(colors: Colors) {
   const newColors: Colors = {};

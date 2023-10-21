@@ -5,14 +5,15 @@ import { SketchPicker } from "react-color";
 import styled from "styled-components";
 import { IoMdDownload } from "react-icons/io";
 import { generate } from "../../lib/file";
-import { isLightOrDark } from "lib/colors";
+import { Color, Colors, isLightOrDark } from "lib/colors";
 import { Line } from "./Line";
 import { Indent } from "./Indent";
+import { normalize } from "lib/string";
 
 export const Terminal = () => {
   const [name, setName] = useState("mycolorscheme");
   const [mouse, setMouse] = useState({ top: 0, left: 0 });
-  const [colors, setColors] = useState({
+  const [colors, setColors] = useState<Colors>({
     bg: sick.background,
     fg: sick.foreground,
     comments: sick.magenta,
@@ -27,7 +28,6 @@ export const Terminal = () => {
   const [darkLight, setDarkLight] = useState<"dark" | "light">(
     isLightOrDark(colors.bg)
   );
-  type Color = keyof typeof colors;
   const [activePicker, setActivePicker] = useState<Color | null>(null);
 
   const onTokenClicked =
@@ -38,21 +38,33 @@ export const Terminal = () => {
       setMouse({ top: event.clientY, left: event.clientX });
     };
 
-  const Token = ({ children, c }: { children?: React.ReactNode; c: Color }) => {
+  const Token = ({
+    children,
+    c,
+    inverted,
+    full,
+  }: {
+    children?: React.ReactNode;
+    c: Color;
+    inverted?: boolean;
+    full?: boolean;
+  }) => {
     const [mouseOver, setMouseOver] = useState(false);
     return (
-      <span
-        className="cursor-pointer"
+      <div
+        className="inline-flex cursor-pointer"
         style={{
-          color: colors[c],
+          color: inverted ? colors.fg : colors[c],
+          backgroundColor: inverted ? colors[c] : colors.bg,
           textDecoration: mouseOver ? "underline" : "",
+          width: full ? "100%" : "auto",
         }}
         onClick={onTokenClicked(c)}
         onMouseOver={() => setMouseOver(true)}
         onMouseLeave={() => setMouseOver(false)}
       >
         {children}
-      </span>
+      </div>
     );
   };
 
@@ -80,7 +92,7 @@ export const Terminal = () => {
 
   const Square = ({ c }: { c: Color }) => (
     <div
-      className={classNames("w-4 h-4 cursor-pointer")}
+      className={classNames("w-10 h-10 md:w-4 md:h-4 cursor-pointer")}
       style={{ backgroundColor: colors[c] }}
       onClick={onTokenClicked(c)}
     />
@@ -162,23 +174,23 @@ export const Terminal = () => {
           <div className="bg-[rgb(255,188,46)] rounded-full w-3 h-3 mx-1" />
           <div className="bg-[rgb(43,200,64)] rounded-full w-3 h-3 mx-1" />
         </div>
+        <div className="absolute z-10 top-7 right-14 md:right-8 border border-gray-600 rounded-sm">
+          <Square c="bg" />
+          <Square c="fg" />
+        </div>
+        <div className="absolute z-10 top-7 right-2 border border-gray-600 rounded-sm">
+          <Square c="color1" />
+          <Square c="color2" />
+          <Square c="color3" />
+          <Square c="color4" />
+          <Square c="color5" />
+          <Square c="color6" />
+        </div>
         <div
-          className="p-3 border rounded-b-md relative"
+          className="p-3 pb-0 border rounded-b-md relative overflow-x-auto overflow-y-hidden"
           style={{ color: colors.fg, backgroundColor: colors.bg }}
           onClick={handleBackgroundClick}
         >
-          <div className="absolute top-2 right-8 border border-gray-600 rounded-sm">
-            <Square c="bg" />
-            <Square c="fg" />
-          </div>
-          <div className="absolute top-2 right-2 border border-gray-600 rounded-sm">
-            <Square c="color1" />
-            <Square c="color2" />
-            <Square c="color3" />
-            <Square c="color4" />
-            <Square c="color5" />
-            <Square c="color6" />
-          </div>
           <Line>
             <W5>import</W5> <W1>vimColors</W1> <W5>from</W5>{" "}
             <W3>&quot;vim-colors&quot;</W3>;
@@ -242,16 +254,34 @@ export const Terminal = () => {
             <W2>export</W2> <W2>const</W2> <W1>theme</W1> <W6>=</W6>{" "}
             <W2>new</W2> <W1>Theme</W1>(<W3>&quot;{name}&quot;</W3>);
           </Line>
+          <Line className="mt-2 -ml-3 -mr-3">
+            <Token c="menus" inverted full>
+              <div className="flex gap-2 w-full">
+                <span
+                  className="border-r px-2 "
+                  style={{
+                    borderColor: colors.fg,
+                    color: colors.menus,
+                    backgroundColor: colors.fg,
+                  }}
+                >
+                  Normal
+                </span>
+                <span>{name}.ts</span>
+              </div>
+              <span className="mr-2">typescript</span>
+            </Token>
+          </Line>
         </div>
       </section>
-      <div className="flex items-center justify-center mt-4 gap-4">
+      <div className="flex flex-col md:flex-row items-center justify-center mt-4 gap-4">
         <div className="flex gap-1 items-center">
           <label htmlFor="name">Name:</label>
           <input
             name="name"
             type="text"
             value={name}
-            onChange={(ev) => setName(ev.target.value)}
+            onChange={(ev) => setName(normalize(ev.target.value))}
             className="bg-bg py-1 px-2 rounded-md outline-none text-accent"
           />
         </div>

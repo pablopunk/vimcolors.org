@@ -1,6 +1,12 @@
-export const Line = ({ children }: { children?: React.ReactNode }) => {
+export const Line = ({
+  children,
+  className,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+}) => {
   return (
-    <pre>
+    <pre className={className}>
       <code>{children ? children : <br />}</code>
     </pre>
   );

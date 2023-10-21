@@ -17,7 +17,7 @@ export const Generator = () => (
     <h2 className="mb-3 bg-accent text-bg px-2 text-md text-center">
       `Generate your own vim colorschemes`
     </h2>
-    <article className="bg-bg2 py-5 px-4 rounded-xl shadow-lg">
+    <article className="bg-bg2 py-5 px-4 rounded-xl shadow-lg max-w-[100%]">
       <h3 className="inline text-accent text-xl mr-2">1.</h3>
       <span>
         Choose below your favorite colors and they will become a vim

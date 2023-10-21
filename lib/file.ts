@@ -1,10 +1,14 @@
 "use strict";
 
 import vim from "vim-colors";
-import { removeHash } from "./colors";
+import { Colors, removeHash } from "./colors";
 import { normalize } from "./string";
 
-export function generate(name, colors, darkOrLight: "dark" | "light") {
+export function generate(
+  name: string,
+  colors: Colors,
+  darkOrLight: "dark" | "light"
+) {
   const newColors = removeHash(colors);
 
   name = normalize(name);
@@ -28,7 +32,7 @@ export function generate(name, colors, darkOrLight: "dark" | "light") {
   download(`${name}.vim`, vimScript);
 }
 
-function download(filename, text) {
+function download(filename: string, text: string) {
   const element = document.createElement("a");
   element.setAttribute(
     "href",
