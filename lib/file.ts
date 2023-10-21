@@ -1,20 +1,19 @@
-'use strict'
+"use strict";
 
-import vim from 'vim-colors'
-import contrast from 'contrast'
-import { removeHash } from './colors'
-import { normalize } from './string'
+import vim from "vim-colors";
+import { removeHash } from "./colors";
+import { normalize } from "./string";
 
-export function generate(name, colors, darkOrLight: 'dark' | 'light') {
-  const newColors = removeHash(colors)
+export function generate(name, colors, darkOrLight: "dark" | "light") {
+  const newColors = removeHash(colors);
 
-  name = normalize(name)
+  name = normalize(name);
   if (!name) {
-    name = 'my-scheme'
+    name = "my-scheme";
   }
 
   const vimScript = vim(name, {
-    dark: darkOrLight === 'dark',
+    dark: darkOrLight === "dark",
     ...newColors,
     scheme: [
       newColors.color1,
@@ -24,23 +23,23 @@ export function generate(name, colors, darkOrLight: 'dark' | 'light') {
       newColors.color5,
       newColors.color6,
     ],
-  })
+  });
 
-  download(`${name}.vim`, vimScript)
+  download(`${name}.vim`, vimScript);
 }
 
 function download(filename, text) {
-  const element = document.createElement('a')
+  const element = document.createElement("a");
   element.setAttribute(
-    'href',
-    'data:text/plain;charset=utf-8,' + encodeURIComponent(text)
-  )
-  element.setAttribute('download', filename)
+    "href",
+    "data:text/plain;charset=utf-8," + encodeURIComponent(text)
+  );
+  element.setAttribute("download", filename);
 
-  element.style.display = 'none'
-  document.body.appendChild(element)
+  element.style.display = "none";
+  document.body.appendChild(element);
 
-  element.click()
+  element.click();
 
-  document.body.removeChild(element)
+  document.body.removeChild(element);
 }

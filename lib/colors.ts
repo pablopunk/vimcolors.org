@@ -1,5 +1,3 @@
-"use strict";
-
 type Colors = { [name: string]: string };
 
 export function removeHash(colors: Colors) {

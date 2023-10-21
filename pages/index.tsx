@@ -1,7 +1,7 @@
-import React from 'react'
-import Head from 'next/head'
-import { Generator } from 'components/Generator'
-import { RelatedContent } from 'components/RelatedContent'
+import React from "react";
+import Head from "next/head";
+import { Generator } from "components/Generator";
+import { RelatedContent } from "components/RelatedContent";
 
 const Index = () => (
   <>
@@ -13,6 +13,6 @@ const Index = () => (
       <RelatedContent />
     </div>
   </>
-)
+);
 
-export default Index
+export default Index;
