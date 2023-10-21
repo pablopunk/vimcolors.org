@@ -1,5 +1,5 @@
-import { Terminal } from './Terminal'
-import styled from 'styled-components'
+import { Terminal } from "./Terminal/Terminal";
+import styled from "styled-components";
 
 const StyledCode = styled.code`
   font-size: 1.4em;
@@ -7,7 +7,7 @@ const StyledCode = styled.code`
   .dark & {
     color: DarkTurquoise;
   }
-`
+`;
 
 export const Generator = () => (
   <div className="flex flex-col items-center">
@@ -28,7 +28,7 @@ export const Generator = () => (
     <article className="bg-bg2 py-5 px-4 rounded-xl shadow-lg mt-4">
       <h3 className="inline text-accent text-xl mr-2">2.</h3>
       <span>
-        Now you can <StyledCode>:source 'path/to/your/file.vim'</StyledCode>{' '}
+        Now you can <StyledCode>:source {"'path/to/your/file.vim'"}</StyledCode>{" "}
         inside vim or neovim.
       </span>
     </article>
@@ -48,4 +48,4 @@ export const Generator = () => (
       </ul>
     </section>
   </div>
-)
+);
