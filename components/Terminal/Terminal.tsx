@@ -218,7 +218,8 @@ export const Terminal = () => {
           </Line>
           <Indent>
             <Line>
-              <W3>constructor</W3>(<W1>name</W1>: <W1>string</W1>) {"{"}
+              <W3>constructor</W3>(<W2>private</W2> <W1>name</W1>:{" "}
+              <W1>string</W1>) {"{"}
             </Line>
             <Indent>
               <Line>
