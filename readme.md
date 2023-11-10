@@ -2,8 +2,8 @@
 
 > Customize your vim colors. Simple AF.
 
-![dark screenshot](./art/dark.png)
-![light screenshot](./art/light.png)
+![dark screenshot](./art/dark.png#gh-dark-mode-only)
+![light screenshot](./art/light.png#gh-light-mode-only)
 
 ### Example schemes
 
