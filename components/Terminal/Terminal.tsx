@@ -92,7 +92,7 @@ export const Terminal = () => {
 
   const Square = ({ c }: { c: Color }) => (
     <div
-      className={classNames("w-10 h-10 md:w-4 md:h-4 cursor-pointer")}
+      className={classNames("w-10 h-10 lg:w-4 lg:h-4 cursor-pointer")}
       style={{ backgroundColor: colors[c] }}
       onClick={onTokenClicked(c)}
     />
@@ -177,7 +177,7 @@ export const Terminal = () => {
           <div className="bg-[rgb(255,188,46)] rounded-full w-3 h-3 mx-1" />
           <div className="bg-[rgb(43,200,64)] rounded-full w-3 h-3 mx-1" />
         </div>
-        <div className="absolute z-10 top-7 right-14 md:right-8 border border-gray-600 rounded-sm">
+        <div className="absolute z-10 top-7 right-14 lg:right-8 border border-gray-600 rounded-sm">
           <Square c="bg" />
           <Square c="fg" />
         </div>
@@ -278,7 +278,7 @@ export const Terminal = () => {
           </Line>
         </div>
       </section>
-      <div className="flex flex-col md:flex-row items-center justify-center mt-4 gap-4">
+      <div className="flex flex-col lg:flex-row items-center justify-center mt-4 gap-4">
         <div className="flex gap-1 items-center">
           <label htmlFor="name">Name:</label>
           <input
@@ -289,7 +289,7 @@ export const Terminal = () => {
             className="bg-bg py-1 px-2 rounded-md outline-none text-accent"
           />
         </div>
-        <div className="bg-bg rounded-full border shadow-md p-[2px]">
+        <div className="bg-bg rounded-full border shadow-md p-[2px] whitespace-nowrap">
           <button
             onClick={() => setGlobalDarkLight("dark")}
             className={classNames(

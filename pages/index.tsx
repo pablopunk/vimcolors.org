@@ -8,7 +8,7 @@ const Index = () => (
     <Head>
       <title>Vim colors | Generate your custom colorscheme</title>
     </Head>
-    <div className="flex flex-col gap-5 md:flex-row">
+    <div className="flex flex-col gap-5 lg:flex-row">
       <Generator />
       <RelatedContent />
     </div>
