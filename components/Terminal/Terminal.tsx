@@ -190,7 +190,7 @@ export const Terminal = () => {
           <Square c="color6" />
         </div>
         <div
-          className="p-3 pb-0 border rounded-b-md relative overflow-x-auto overflow-y-hidden"
+          className="p-3 pb-0 border border-gray-700 rounded-b-md relative overflow-x-auto overflow-y-hidden"
           style={{ color: colors.fg, backgroundColor: colors.bg }}
           onClick={handleBackgroundClick}
         >
