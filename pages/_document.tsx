@@ -1,5 +1,6 @@
 import Document, { Main, NextScript, Html, Head } from "next/document";
 import { ServerStyleSheet } from "styled-components";
+import { Analytics } from "@vercel/analytics/react";
 
 const darkModeCode = `(function() {
   function setDarkMode(v) {
@@ -132,6 +133,7 @@ export default class extends Document {
           <div dangerouslySetInnerHTML={{ __html: seeOnGithubCode }} />
           <Main />
           <NextScript />
+          <Analytics />
         </body>
       </Html>
     );
