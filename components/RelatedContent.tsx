@@ -1,27 +1,27 @@
-import { MdOutlineArticle } from 'react-icons/md'
-import classNames from 'classnames'
+import { MdOutlineArticle } from "react-icons/md";
+import classNames from "classnames";
 
 const articles = [
   {
+    title: "I made a macOS app for the ultimate window management",
+    author: "@pablopunk",
+    date: "December 2023",
+    url: "https://pablopunk.com/posts/i-made-a-macos-app-for-the-ultimate-window-management",
+  },
+  {
     title:
       "I told ChatGPT to create a passive store and now I don't code anymore",
-    author: '@pablopunk',
-    date: 'March 2023',
-    url: 'https://pablopunk.com/posts/i-told-chatgpt-to-create-a-passive-store-and-now-i-don-t-code-anymore',
+    author: "@pablopunk",
+    date: "March 2023",
+    url: "https://pablopunk.com/posts/i-told-chatgpt-to-create-a-passive-store-and-now-i-don-t-code-anymore",
   },
   {
-    title: 'How to create a real-time UI with NextJS and Supabase',
-    author: '@pablopunk',
-    date: 'August 2021',
-    url: 'https://pablopunk.com/posts/how-to-create-a-real-time-ui-with-nextjs-and-supabase',
+    title: "How to create a real-time UI with NextJS and Supabase",
+    author: "@pablopunk",
+    date: "August 2021",
+    url: "https://pablopunk.com/posts/how-to-create-a-real-time-ui-with-nextjs-and-supabase",
   },
-  {
-    title: 'File finder and project search in Vim without any plugins',
-    author: '@pablopunk',
-    date: 'June 2021',
-    url: 'https://pablopunk.com/posts/file-finder-and-project-search-in-vim-without-any-plugins',
-  },
-]
+];
 
 export const RelatedContent = () => (
   <section className="border-l pl-4">
@@ -30,8 +30,8 @@ export const RelatedContent = () => (
       <article key={article.url} className="border p-4 rounded-lg mb-4">
         <a
           href={article.url}
-          className={classNames('transition-colors hover:text-accent', {
-            'text-accent-alt': index === 0,
+          className={classNames("transition-colors hover:text-accent", {
+            "text-accent-alt": index === 0,
           })}
         >
           <h3>
@@ -45,4 +45,4 @@ export const RelatedContent = () => (
       </article>
     ))}
   </section>
-)
+);
