@@ -9,17 +9,22 @@ const articles = [
     url: "https://pablopunk.com/posts/i-made-a-macos-app-for-the-ultimate-window-management",
   },
   {
-    title:
-      "I told ChatGPT to create a passive store and now I don't code anymore",
+    title: "I made a Neovim plugin because I missed a feature from VSCode",
     author: "@pablopunk",
-    date: "March 2023",
-    url: "https://pablopunk.com/posts/i-told-chatgpt-to-create-a-passive-store-and-now-i-don-t-code-anymore",
+    date: "Oct 2023",
+    url: "https://pablopunk.com/posts/i-made-a-neovim-plugin-because-i-missed-a-feature-from-vscode",
   },
   {
-    title: "How to create a real-time UI with NextJS and Supabase",
+    title: "File finder and project search in Vim without any plugins",
     author: "@pablopunk",
-    date: "August 2021",
-    url: "https://pablopunk.com/posts/how-to-create-a-real-time-ui-with-nextjs-and-supabase",
+    date: "Jun 2021",
+    url: "https://pablopunk.com/posts/file-finder-and-project-search-in-vim-without-any-plugins",
+  },
+  {
+    title: "How to replace text in vim only inside a specific search",
+    author: "@pablopunk",
+    date: "Jun 2021",
+    url: "https://pablopunk.com/posts/file-finder-and-project-search-in-vim-without-any-plugins",
   },
 ];
 
